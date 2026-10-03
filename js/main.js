@@ -102,6 +102,23 @@
   var lenis = null;
   var waUrl = function (text) { return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text); };
   function playQuiet(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+
+  /* sin viudas: une las dos últimas palabras con un espacio que no corta,
+     así nunca queda una palabra sola en la última línea */
+  function noWidow(el) {
+    if (!el || (el.textContent.trim().match(/\s+/g) || []).length < 2) return; // con menos de 3 palabras no hace falta
+    var nodes = [], tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), n, word = false;
+    while ((n = tw.nextNode())) nodes.push(n);
+    for (var k = nodes.length - 1; k >= 0; k--) {
+      var v = nodes[k].nodeValue;
+      for (var i = v.length - 1; i >= 0; i--) {
+        if (!/\s/.test(v.charAt(i))) { word = true; continue; }
+        if (word) { nodes[k].nodeValue = v.slice(0, i) + " " + v.slice(i + 1); return; }
+      }
+    }
+  }
+  var WIDOWS = ".somos__lead, .somos__body, .sec-lead, .srv__desc, .warn__body, .srv-cta__sel, .works__hint";
+  $$(WIDOWS).forEach(noWidow);
   // con sonido; si el navegador no lo deja, arranca en silencio (se activa desde los controles)
   function playLoud(v) {
     var p = v.play();
@@ -142,7 +159,7 @@
     askBtn.href = waUrl(sel.length ? "Hola cactus! Quiero consultar por: " + sel.join(", ") + "." : "Hola cactus! Quiero hacer una consulta.");
     askN.hidden = !sel.length;
     askN.textContent = sel.length;
-    if (askSel) askSel.innerHTML = sel.length ? "Elegiste: <b>" + sel.join(", ") + "</b>." : askIdle;
+    if (askSel) { askSel.innerHTML = sel.length ? "Elegiste: <b>" + sel.join(", ") + "</b>." : askIdle; noWidow(askSel); }
     // un golpecito al botón cada vez que cambia la selección, para que se note
     if (bump && window.gsap && motion) gsap.fromTo(askBtn, { scale: 1.06 }, { scale: 1, duration: 0.6, ease: "back.out(3)", overwrite: true });
   }
@@ -254,6 +271,7 @@
     $("#pv-title").textContent = p.title;
     $("#pv-meta").innerHTML = p.meta.map(function (m) { return "<div><dt>" + m[0] + "</dt><dd>" + m[1] + "</dd></div>"; }).join("");
     $("#pv-text").innerHTML = p.text.map(function (t) { return "<p>" + t + "</p>"; }).join("");
+    noWidow($("#pv-title")); $$("#pv-text p").forEach(noWidow);
     pv.hidden = false; pvOpen = true;
     $$(".piece video").forEach(function (v) { if (!v.paused) v.pause(); });
     document.body.classList.add("no-scroll");

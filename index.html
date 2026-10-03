@@ -15,7 +15,7 @@
   <!-- Poppins 400-700 van locales (assets/fonts); la Light y la Light Italic del manual vienen de Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap">
   <link rel="preload" href="assets/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=10">
   <script>
     (function () {
       var d = document.documentElement;
@@ -112,18 +112,41 @@
       </div>
     </section>
 
-    <!-- banda verde con flechas negras largas (de borde a borde) y el teléfono de la marca sonando: al tocarla baja a servicios.
-         Son 5 flechas por lado; en pantallas más chicas se ven menos -->
+    <!-- banda verde con las flechas y el teléfono sonando, igual al frame "manga final" de Figma (2249×398).
+         Las flechas son el "→" de Poppins girado; el teléfono va girado como en el frame.
+         En pantallas angostas se ve el centro (el teléfono y las flechas de al lado). Al tocarla baja a servicios -->
     <a class="band band--call" href="#servicios" aria-label="Bajar a servicios">
-      <span class="call" aria-hidden="true">
-        <span class="call__arrows"><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span></span>
-        <span class="call__phone">
-          <span class="call__ring call__ring--l"><svg viewBox="0 0 56 80"><path class="o" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/><path class="i" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/></svg></span>
-          <img src="assets/img/telefono.webp" width="704" height="1100" alt="" draggable="false">
-          <span class="call__ring call__ring--r"><svg viewBox="0 0 56 80"><path class="o" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/><path class="i" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/></svg></span>
-        </span>
-        <span class="call__arrows"><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span></span>
-      </span>
+      <svg class="call" viewBox="0 0 2249 398" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+          <path id="flecha" d="M239.624 201C244.691 187.803 250.264 175.621 256.344 164.455C262.424 152.78 269.264 141.867 276.864 131.716H0L3 101.036L3.7743 72.1738L276.864 69.2841C269.771 59.1326 263.184 48.4735 257.104 37.3068C251.024 25.6326 245.451 13.197 240.384 0H298.144C329.557 37.053 364.011 65.2235 401.504 84.5114V117.25C364.011 135.523 329.557 163.439 298.144 201H239.624Z"/>
+        </defs>
+        <g fill="#191919">
+          <use href="#flecha" transform="matrix(0 1 -1 0 58 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 273 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 488.174 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 703 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 918.174 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 1523 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 1738 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 1953.174 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 2168 -4)"/>
+          <use href="#flecha" transform="matrix(0 1 -1 0 2383.174 -4)"/>
+        </g>
+        <!-- el teléfono (704×1100) ubicado y girado como en el frame -->
+        <g transform="matrix(0.374919 0.123724 -0.123724 0.374919 1059.883 -60.789) rotate(1.6 352 935)">
+          <g class="call__phone">
+            <image href="assets/img/telefono.webp" width="704" height="1100"/>
+            <g class="call__ring" transform="translate(281.6 198) scale(-3.01714 3.01714)" fill="none" stroke-linecap="round">
+              <path stroke="#191919" stroke-width="13" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/>
+              <path stroke="#7BE600" stroke-width="6.5" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/>
+            </g>
+            <g class="call__ring" transform="translate(619.52 165) scale(3.01714)" fill="none" stroke-linecap="round">
+              <path stroke="#191919" stroke-width="13" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/>
+              <path stroke="#7BE600" stroke-width="6.5" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/>
+            </g>
+          </g>
+        </g>
+      </svg>
     </a>
 
     <!-- ============ SERVICIOS (se pasa a blanco suave al llegar) ============ -->
@@ -324,6 +347,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>
