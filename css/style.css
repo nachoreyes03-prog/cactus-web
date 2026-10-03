@@ -63,6 +63,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    el SVG toma el color del texto y se apoya en la línea de base */
 .script { font-style: normal; letter-spacing: 0; }
 .script-svg { display: inline-block; fill: currentColor; overflow: visible; }
+/* el glow de la Aston, como en los afiches de Figma: un halo del mismo color que la letra
+   (blanco 0,1 del tamaño de la letra; en servicios, que queda negra sobre blanco, 0,25 como los afiches con letra negra) */
+.script-svg { filter: drop-shadow(0 0 var(--glow, 0.1em) currentColor); }
+.srv-col__title .script-svg { --glow: 0.25em; }
 
 /* textura de papel impreso (se nota sobre el blanco y el verde) */
 .paper {
