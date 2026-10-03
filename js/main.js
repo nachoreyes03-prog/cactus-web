@@ -379,17 +379,30 @@
     [heroIntro, parallax, servicesFade, floatPieces].forEach(function (fn) {
       try { fn(); } catch (e) { if (window.console) console.error("[cactus]", fn.name, e); }
     });
-    gsap.set(".hero__tag .w, .hl", { opacity: 1 });
+    gsap.set(".hero__tag .w", { opacity: 1 }); // el logo aparece solo cuando arranca su animación
     ScrollTrigger.refresh();
   });
-  window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+  // el recálculo de cuando termina de cargar todo espera a que termine la animación del logo (así no la corta)
+  var introDone = false, refreshLater = false;
+  window.addEventListener("load", function () { if (introDone) ScrollTrigger.refresh(); else refreshLater = true; });
 
   /* inicio: la única animación es la de cactus, letra por letra. "no te quedes afuera" queda quieto */
+  // arranca cuando las letras ya están decodificadas (así no se traba el primer cuadro)
   function heroIntro() {
-    gsap.set(".hl", { opacity: 1 });
-    gsap.timeline({ defaults: { ease: "expo.out" } })
-      .from(".hl:not(.hl--r)", { y: 400, duration: 1.3, stagger: 0.07 }, 0.2)
-      .from(".hl--r", { scale: 0, svgOrigin: "1379.7 30.2", duration: 0.7, ease: "back.out(2.4)" }, 1.05); // el ® crece desde su centro
+    var box = $(".hero__logo"), imgs = $$(".hero__logo .hl");
+    var decoded = Promise.all(imgs.map(function (im) { return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); }));
+    setTimeout(function () { gsap.set(imgs, { opacity: 1 }); }, 3500); // por las dudas: el logo nunca queda escondido
+    Promise.race([decoded, new Promise(function (r) { setTimeout(r, 1500); })]).then(function () {
+      var tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+      tl.from(".hl:not(.hl--r)", { y: function () { return box.offsetHeight * 1.15; }, duration: 1.3, stagger: 0.07 }, 0.1)
+        .from(".hl--r", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.4)" }, 0.95); // el ® crece desde su centro
+      gsap.set(imgs, { opacity: 1 });
+      tl.eventCallback("onComplete", function () {
+        gsap.set(imgs, { clearProps: "transform" });
+        introDone = true;
+        if (refreshLater) ScrollTrigger.refresh();
+      });
+    });
   }
 
   /* la trama se desliza adentro de su banda */

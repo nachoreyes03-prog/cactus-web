@@ -70,9 +70,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   inset: 0;
   z-index: 70;
   pointer-events: none;
-  background: url("../assets/img/paper.jpg") center / cover no-repeat;
-  mix-blend-mode: multiply;
-  opacity: 0.5;
+  background: url("../assets/img/paper-shade.webp") center / cover no-repeat;
+  /* es la textura de antes (multiplicada al 50 %) ya calculada como sombra negra con transparencia:
+     se ve igual y no obliga a recalcular toda la pantalla en cada cuadro */
 }
 
 /* ---------- aparecer al scrollear (como en juliamarro.com) ---------- */
@@ -138,7 +138,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   padding: var(--hdr) var(--gutter) 5vh;
 }
 .hero__inner { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.hero__logo { width: 100%; height: auto; overflow: visible; fill: currentColor; color: var(--paper); }
+/* el logo de Figma: una imagen por letra, ubicadas en % de la caja (3510×880 del original) */
+.hero__logo { position: relative; width: 100%; aspect-ratio: 3510 / 880; overflow: hidden; }
+.hero__logo .hl { position: absolute; left: calc(var(--l) * 1%); top: calc(var(--t) * 1%); width: calc(var(--w) * 1%); height: auto; max-width: none; pointer-events: none; -webkit-user-drag: none; user-select: none; }
 .hero__tag { margin: 0.6em 0 0; font-size: clamp(1.5rem, 3.7vw, 3.9rem); line-height: 1; color: var(--lime); }
 .hero__tag .w { display: inline-block; margin-right: 0.12em; }
 .hero__tag .w:last-child { margin-right: 0; }
@@ -192,11 +194,15 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* el teléfono de la marca sonando, solo sobre el negro (como arranca el gancho del video), entre "somos" y servicios */
 .callspot { display: block; width: fit-content; margin: 0 auto; padding: clamp(8px, 2vw, 30px) 0; cursor: pointer; text-decoration: none; -webkit-tap-highlight-color: transparent; }
 .callspot:focus-visible { outline: 3px solid var(--lime); outline-offset: 6px; }
-.call__tel { display: block; height: clamp(210px, 25vw, 380px); width: auto; aspect-ratio: 420 / 398; overflow: visible; }
-/* el teléfono tiembla de a dos golpes alrededor de la base (en las medidas de la imagen: 352, 935) */
-.call__phone { transform-origin: 352px 935px; }
-.call__phone image { filter: drop-shadow(0 30px 34px rgba(0, 0, 0, 0.42)); }
-.motion .call__phone { animation: callRing 2.4s infinite; }
+/* el temblor va en el SVG entero (lo mueve la placa de video, sin redibujar), girando desde la base del teléfono */
+.call__tel { display: block; height: clamp(230px, 28vw, 420px); width: auto; aspect-ratio: 420 / 398; overflow: visible; transform-origin: 37.18% 83.75%; }
+/* en la compu va a la derecha y más grande, subido al lado de Atus y Cami (ahí había un vacío) */
+@media (min-width: 901px) {
+  .callspot { margin: calc(-1 * min(18vw, 290px)) var(--gutter) 0 auto; padding: 0; }
+  .call__tel { height: clamp(300px, 34vw, 600px); }
+}
+/* el teléfono tiembla de a dos golpes y los rings titilan con él */
+.motion .call__tel { animation: callRing 2.4s infinite; }
 .motion .call__ring { opacity: 0; animation: callMark 2.4s infinite; }
 .band--call.is-off * { animation-play-state: paused; }
 @keyframes callRing {
