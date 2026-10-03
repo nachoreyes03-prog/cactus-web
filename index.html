@@ -15,7 +15,7 @@
   <!-- Poppins 400-700 van locales (assets/fonts); la Light y la Light Italic del manual vienen de Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap">
   <link rel="preload" href="assets/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
   <script>
     (function () {
       var d = document.documentElement;
@@ -112,32 +112,28 @@
       </div>
     </section>
 
-    <!-- banda de trama con el teléfono de la marca sonando y flechas para abajo: al tocarla baja a servicios -->
+    <!-- banda de flechas gordas para abajo con el teléfono de la marca sonando: al tocarla baja a servicios -->
     <a class="band band--call plx" data-plx="9" href="#servicios" aria-label="Bajar a servicios">
-      <svg class="band__bg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="1600" height="1000" fill="url(#trama-verde)"/></svg>
+      <span class="band__bg band__bg--arrows" aria-hidden="true"></span>
       <span class="call" aria-hidden="true">
-        <span class="call__arrow"><svg viewBox="0 0 48 48"><path d="M24 7v31M11 25.5 24 38.5 37 25.5"/></svg></span>
         <span class="call__phone">
           <span class="call__ring call__ring--l"><svg viewBox="0 0 56 80"><path class="o" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/><path class="i" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/></svg></span>
           <img src="assets/img/telefono.webp" width="704" height="1100" alt="" draggable="false">
           <span class="call__ring call__ring--r"><svg viewBox="0 0 56 80"><path class="o" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/><path class="i" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/></svg></span>
         </span>
-        <span class="call__arrow"><svg viewBox="0 0 48 48"><path d="M24 7v31M11 25.5 24 38.5 37 25.5"/></svg></span>
       </span>
     </a>
 
     <!-- ============ SERVICIOS (se pasa a blanco suave al llegar) ============ -->
     <section class="services" id="servicios">
-      <div class="sec-head">
-        <!-- el cartel de "atención" va pegado al título, abajo a la derecha -->
-        <div class="srv-head">
-          <h2 class="sec-title display rv">servicios</h2>
-          <div class="warn rv">
-            <div class="warn__head"><svg class="warn__icon" viewBox="0 0 24 21" aria-hidden="true"><path d="M12 .8 23.3 20.4H.7Z"/><rect x="10.7" y="6.6" width="2.6" height="7.8" rx="1.1"/><circle cx="12" cy="17.1" r="1.6"/></svg> atención</div>
-            <p class="warn__body">Contiene diseño. Puede generar ganas de cambiar el logo, el packaging y la web.</p>
-          </div>
-        </div>
+      <!-- el cartel de "atención" flota a la derecha, a mitad de altura entre el título y la bajada -->
+      <div class="sec-head srv-head">
+        <h2 class="sec-title display rv">servicios</h2>
         <p class="sec-lead rv">Elegí uno o varios y consultanos todo junto por WhatsApp.</p>
+        <div class="warn rv">
+          <div class="warn__head"><svg class="warn__icon" viewBox="0 0 24 21" aria-hidden="true"><path d="M12 .8 23.3 20.4H.7Z"/><rect x="10.7" y="6.6" width="2.6" height="7.8" rx="1.1"/><circle cx="12" cy="17.1" r="1.6"/></svg> atención</div>
+          <p class="warn__body">Contiene diseño. Puede generar ganas de cambiar el logo, el packaging y la web.</p>
+        </div>
       </div>
 
       <div class="services__cols">
@@ -229,14 +225,9 @@
       </div>
 
       <div class="board" id="board">
-        <figure class="piece" style="--x:5;--y:7;--w:17;--r:-3" data-float="80" data-project="udent" data-slide="0">
-          <div class="piece__float"><div class="piece__tilt">
-            <div class="piece__frame"><img src="assets/img/udent/tapa.svg" width="800" height="1000" alt="U.Dent, identidad para un estudio dental" draggable="false"></div>
-            <figcaption class="piece__tag"><b>U.Dent</b> <span>identidad · en proceso</span></figcaption>
-          </div></div>
-        </figure>
-        <!-- el video de marca: en la mesa corre sin sonido; al tocarlo se abre con sonido -->
-        <figure class="piece piece--video" style="--x:37;--y:57;--w:25;--r:-2" data-float="100" data-project="video" data-slide="0">
+        <!-- el video de marca va primero: arriba al medio en la compu, primero en el celu.
+             En la mesa corre sin sonido; al tocarlo se abre con sonido -->
+        <figure class="piece piece--video" style="--x:37.5;--y:8;--w:25;--r:-1.5" data-float="50" data-project="video" data-slide="0">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame">
               <video muted loop playsinline preload="none" width="960" height="540" poster="assets/video/cactus-gancho.jpg" data-src="assets/video/cactus-gancho-540.mp4" aria-hidden="true"></video>
@@ -245,37 +236,43 @@
             <figcaption class="piece__tag"><b>Video de marca</b> <span>motion</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:27;--y:22;--w:15;--r:4" data-float="140" data-project="nosllaman" data-slide="0">
+        <figure class="piece" style="--x:5;--y:7;--w:17;--r:-3" data-float="80" data-project="udent" data-slide="0">
+          <div class="piece__float"><div class="piece__tilt">
+            <div class="piece__frame"><img src="assets/img/udent/tapa.svg" width="800" height="1000" alt="U.Dent, identidad para un estudio dental" draggable="false"></div>
+            <figcaption class="piece__tag"><b>U.Dent</b> <span>identidad · en proceso</span></figcaption>
+          </div></div>
+        </figure>
+        <figure class="piece" style="--x:30;--y:40;--w:15;--r:4" data-float="140" data-project="nosllaman" data-slide="0">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame"><img src="assets/img/afiche-blanco.webp" width="900" height="1126" alt="Afiche de cactus®: Nos llaman? ah sí" draggable="false" loading="lazy"></div>
             <figcaption class="piece__tag"><b>Nos llaman?</b> <span>campaña</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:46;--y:4;--w:14;--r:-2" data-float="60" data-project="identidad" data-slide="1">
+        <figure class="piece" style="--x:50;--y:45;--w:14;--r:-2" data-float="60" data-project="identidad" data-slide="1">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame"><img src="assets/img/cactus-papel-verde.webp" width="900" height="1126" alt="Logotipo de cactus® impreso sobre papel verde" draggable="false" loading="lazy"></div>
             <figcaption class="piece__tag"><b>cactus®</b> <span>identidad</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:65;--y:13;--w:16;--r:3" data-float="110" data-project="afiches" data-slide="1">
+        <figure class="piece" style="--x:67;--y:13;--w:16;--r:3" data-float="110" data-project="afiches" data-slide="1">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame"><img src="assets/img/poster-colores-negro.webp" width="900" height="1126" alt="Afiche negro con tipografía verde gigante" draggable="false" loading="lazy"></div>
             <figcaption class="piece__tag"><b>Probando frases</b> <span>afiches</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:9;--y:60;--w:23;--r:2" data-float="90" data-project="identidad" data-slide="0">
+        <figure class="piece" style="--x:5;--y:56;--w:23;--r:2" data-float="90" data-project="identidad" data-slide="0">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame"><img src="assets/img/logo-papel-negro.webp" width="1440" height="810" alt="Logotipo de cactus® en blanco sobre papel negro" draggable="false" loading="lazy"></div>
             <figcaption class="piece__tag"><b>cactus®</b> <span>logotipo</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:84;--y:6;--w:12;--r:5" data-float="150" data-project="identidad" data-slide="2">
+        <figure class="piece" style="--x:85;--y:5;--w:12;--r:5" data-float="150" data-project="identidad" data-slide="2">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame"><img src="assets/img/trama-verde.webp" width="900" height="900" alt="Trama de la A estrella sobre verde" draggable="false" loading="lazy"></div>
             <figcaption class="piece__tag"><b>cactus®</b> <span>trama</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:72;--y:55;--w:14;--r:-4" data-float="70" data-project="nosllaman" data-slide="1">
+        <figure class="piece" style="--x:72;--y:52;--w:14;--r:-4" data-float="70" data-project="nosllaman" data-slide="1">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame"><img src="assets/img/afiche-negro.webp" width="900" height="1126" alt="Versión negra del afiche Nos llaman?" draggable="false" loading="lazy"></div>
             <figcaption class="piece__tag"><b>Nos llaman?</b> <span>versión negra</span></figcaption>
@@ -325,6 +322,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-  <script src="js/main.js?v=7"></script>
+  <script src="js/main.js?v=8"></script>
 </body>
 </html>
