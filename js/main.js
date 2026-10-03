@@ -430,6 +430,14 @@
      Con el dedo, si arrancás de costado movés la pieza; si arrancás para arriba o abajo, scrollea la página */
   /* trabajos: "reorganizar" vuelve a poner cada pieza en su lugar, de a una y con un sacudón
      (si no se había movido ninguna, igual se sacuden, así se nota que el botón respondió) */
+  // la primera vez que movés una pieza, el botón da un saltito para que lo veas
+  var resetHinted = false;
+  function hintReset() {
+    var b = $("#works-reset");
+    if (resetHinted || !b || !motion) return;
+    resetHinted = true;
+    gsap.fromTo(b, { scale: 1 }, { scale: 1.14, duration: 0.2, ease: "power2.out", yoyo: true, repeat: 1, delay: 0.3 });
+  }
   function reorganize() {
     var btn = $("#works-reset");
     if (!btn) return;
@@ -491,6 +499,7 @@
           setTimeout(function () { p._dragged = false; }, 0);
           gsap.to(p, { x: clampX(gsap.getProperty(p, "x") + vx * 160), y: clampY(gsap.getProperty(p, "y") + vy * 160), duration: 1, ease: "power3.out" });
           gsap.to(tilt, { rotation: 0, scale: 1, duration: 1.1, ease: "elastic.out(1, 0.5)" });
+          hintReset();
         }
         p.addEventListener("pointermove", move);
         p.addEventListener("pointerup", up);

@@ -335,9 +335,25 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .works__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 24px; padding: 0 var(--gutter); }
 .works__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 0.5rem; }
 .works__hint { margin: 0; font-size: 1.02rem; font-weight: 300; color: var(--soft); }
-/* el botón de reorganizar: mismo estilo que "copiar" y "cerrar" */
-.works__reset { flex: none; padding: 0.55em 0.95em 0.6em; border: 2px solid rgba(246, 246, 246, 0.75); font-weight: 600; font-size: 0.95rem; line-height: 1; transition: background-color 0.25s, border-color 0.25s, color 0.25s; }
-.works__reset:hover, .works__reset:focus-visible { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+/* el botón de reorganizar: un cartel verde con sombra blanca, bien a la vista */
+.works__reset {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.62em 1.05em 0.66em;
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.45vw, 1.45rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  box-shadow: 5px 5px 0 var(--paper);
+  transition: background-color 0.25s, box-shadow 0.15s, translate 0.15s;
+}
+.works__reset svg { flex: none; width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.works__reset:hover, .works__reset:focus-visible { background: var(--paper); }
+.works__reset:active { translate: 3px 3px; box-shadow: 2px 2px 0 var(--paper); }
 .board { position: relative; width: 100%; aspect-ratio: 1440 / 1000; margin-top: clamp(16px, 3vh, 40px); }
 .piece {
   position: absolute;
