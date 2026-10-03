@@ -189,11 +189,24 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .band { position: relative; display: block; height: clamp(240px, 44vh, 520px); overflow: hidden; }
 .band__bg { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; max-width: none; will-change: transform; }
 
-/* la banda del teléfono: el frame "manga final" de Figma tal cual (un SVG de 2249×398).
-   En la compu se ve entero; en pantallas angostas queda una altura mínima y se ve el centro. */
-.band--call { width: 100%; min-width: 0; height: auto; aspect-ratio: 2249 / 398; min-height: 150px; background: var(--lime); cursor: pointer; text-decoration: none; }
+/* la banda del teléfono (sale del frame "manga final"): todo se mide con el alto de la banda (--bh),
+   así en el celu las flechas son más chicas y entran más, en vez de verse con zoom.
+   Las flechas salen del teléfono hacia los costados y se cortan en el borde de la pantalla. */
+.band--call {
+  --bh: clamp(100px, 13vw, 210px);
+  --gap: 0.3;
+  --call-bg: var(--paper);
+  height: var(--bh);
+  background: var(--call-bg);
+  cursor: pointer;
+  text-decoration: none;
+}
 .band--call:focus-visible { outline: 4px solid var(--ink); outline-offset: -10px; }
-.call { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.call { position: absolute; inset: 0; display: flex; justify-content: center; }
+.call__side { flex: 1 1 0; min-width: 0; display: flex; gap: calc(var(--bh) * var(--gap)); overflow: hidden; }
+.call__side--l { justify-content: flex-end; }
+.call__arrow { flex: none; width: calc(var(--bh) * 0.5057); height: 100%; fill: var(--ink); }
+.call__tel { flex: none; width: calc(var(--bh) * 1.0553); height: 100%; overflow: visible; margin: 0 calc(var(--bh) * 0.08); }
 /* el teléfono tiembla de a dos golpes alrededor de la base (en las medidas de la imagen: 352, 935) */
 .call__phone { transform-origin: 352px 935px; }
 .call__phone image { filter: drop-shadow(0 30px 34px rgba(0, 0, 0, 0.42)); }
@@ -477,13 +490,11 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   .somos__team { margin-top: 44px; }
   .services__cols { grid-template-columns: 1fr; }
 
-  /* trabajos en mobile: collage en columna, se tocan para ver el proyecto */
-  .board { aspect-ratio: auto; display: flex; flex-direction: column; padding: 8px var(--gutter) 40px; }
-  .piece { position: relative; left: auto; top: auto; width: min(70vw, 400px); cursor: pointer; }
-  .piece:nth-child(odd) { align-self: flex-start; }
-  .piece:nth-child(even) { align-self: flex-end; }
-  .piece.piece--video { align-self: center; }
-  .piece + .piece { margin-top: -10vw; }
+  /* trabajos en mobile: la misma mesa de piezas sueltas, con otra distribución (--mx/--my/--mw/--mr).
+     Se arrastran de costado con el dedo; deslizar para arriba o abajo sigue scrolleando */
+  .board { aspect-ratio: 390 / 897; }
+  .piece { left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); width: calc(var(--mw) * 1vw); }
+  .piece__tilt { rotate: calc(var(--mr) * 1deg); }
   .piece__tag { opacity: 1; }
 
   .pv { grid-template-columns: 1fr; grid-template-rows: 56svh auto; overflow-y: auto; }
@@ -506,10 +517,38 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   .btn { font-size: 0.85rem; padding: 0.5em 0.75em 0.55em; }
   .srv__check { width: 30px; height: 30px; }
   .srv__check::after { width: 9px; height: 16px; border-width: 0 3.5px 3.5px 0; }
-  .srv-head { grid-template-columns: minmax(0, 1fr); }
-  .srv-head .warn { grid-area: 2 / 1; justify-self: end; width: min(330px, 86%); margin: 20px 4px 0 0; translate: none; }
-  .srv-head .sec-lead { grid-area: 3 / 1; }
+  .srv-head { position: relative; grid-template-columns: minmax(0, 1fr); }
+  .srv-head .sec-lead { grid-area: 2 / 1; }
+  /* el cartel de "atención" en el celu: asoma solo el borde con el triángulo; si lo tocás, se abre */
+  .srv-head .warn {
+    position: absolute;
+    grid-area: auto;
+    max-width: none;
+    top: 0.1em;
+    right: calc(-1 * var(--gutter));
+    z-index: 3;
+    width: min(300px, 80vw);
+    margin: 0;
+    translate: calc(100% - 50px) 0;
+    transition: translate 0.55s var(--ease), opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .srv-head .warn.is-open { translate: calc(-1 * var(--gutter)) 0; }
+  /* cerrado es solo la lengüeta verde con el triángulo: el texto aparece al abrirlo */
+  .srv-head .warn .warn__body { max-height: 8em; overflow: hidden; transition: max-height 0.5s var(--ease), padding 0.5s var(--ease), opacity 0.35s; }
+  .srv-head .warn:not(.is-open) .warn__body { max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; }
+  .srv-head .warn:not(.is-open) .warn__head { border-bottom-width: 0; }
+  .srv-head .warn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  /* Atus y Cami uno al lado del otro */
+  .somos__team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 18px; align-items: end; }
+  .somos__by { grid-column: 1 / -1; align-self: start; }
+  .person__logo { height: 44px; }
+  .person__url { font-size: 0.8rem; }
+  /* la última banda de trama, más baja */
+  .band:not(.band--call) { height: 120px; }
   .srv-cta__btn { font-size: 5.6vw; white-space: normal; box-shadow: 6px 6px 0 var(--ink); }
+  .band--call { --gap: 0.2; }
   .ct a { grid-template-columns: 1fr; gap: 2px; }
   .ct b { font-size: 6vw; overflow-wrap: normal; }
   .ct__mail { flex-direction: column; align-items: flex-start; gap: 0; }

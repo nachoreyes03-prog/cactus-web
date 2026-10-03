@@ -171,6 +171,35 @@
   });
   updateAsk(false);
 
+  /* servicios: en el celu el cartel de "atención" asoma del costado y se abre (o se cierra) al tocarlo */
+  var warn = $(".srv-head .warn"), smallMQ = window.matchMedia("(max-width: 760px)");
+  if (warn) {
+    var openWarn = function (open) {
+      warn.classList.toggle("is-open", open);
+      if (smallMQ.matches) warn.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    var setWarn = function () {
+      if (smallMQ.matches) {
+        warn.setAttribute("role", "button"); warn.setAttribute("tabindex", "0");
+        warn.setAttribute("aria-expanded", warn.classList.contains("is-open") ? "true" : "false");
+      } else {
+        ["role", "tabindex", "aria-expanded"].forEach(function (a) { warn.removeAttribute(a); });
+        warn.classList.remove("is-open");
+      }
+    };
+    warn.addEventListener("click", function (e) {
+      if (!smallMQ.matches) return;
+      e.stopPropagation();
+      openWarn(!warn.classList.contains("is-open"));
+    });
+    warn.addEventListener("keydown", function (e) {
+      if (smallMQ.matches && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openWarn(!warn.classList.contains("is-open")); }
+    });
+    document.addEventListener("click", function () { if (warn.classList.contains("is-open")) openWarn(false); });
+    setWarn();
+    if (smallMQ.addEventListener) smallMQ.addEventListener("change", setWarn); else smallMQ.addListener(setWarn);
+  }
+
   /* ---------- header (siempre negro): se vuelve sólido apenas bajás ---------- */
   var hdr = $("#hdr"), pvOpen = false;
   if ("IntersectionObserver" in window) {
@@ -396,28 +425,37 @@
     });
   }
 
-  /* trabajos: se arrastran con el mouse (con inercia y un poco de giro) */
+  /* trabajos: se arrastran con el mouse o con el dedo (con inercia y un poco de giro).
+     Con el dedo, si arrancás de costado movés la pieza; si arrancás para arriba o abajo, scrollea la página */
   function dragPieces() {
     var board = $("#board"), topZ = 10;
-    var canDrag = window.matchMedia("(min-width: 901px) and (hover: hover) and (pointer: fine)");
     pieces.forEach(function (p) {
       var tilt = $(".piece__tilt", p);
       p.addEventListener("pointerdown", function (e) {
-        if (!canDrag.matches || e.pointerType === "touch" || e.button !== 0) return;
-        e.preventDefault();
-        gsap.killTweensOf(p);
+        var touch = e.pointerType !== "mouse";
+        if (!touch && e.button !== 0) return;
+        if (!touch) e.preventDefault();
         var x0 = gsap.getProperty(p, "x"), y0 = gsap.getProperty(p, "y");
         var sx = e.clientX, sy = e.clientY, lx = sx, lt = performance.now(), vx = 0, vy = 0, ly = sy, moved = false;
         var br = board.getBoundingClientRect(), pr = p.getBoundingClientRect();
         var baseL = pr.left - x0, baseT = pr.top - y0, w = pr.width, h = pr.height;
         var clampX = gsap.utils.clamp(br.left - baseL - w * 0.35, br.right - baseL - w * 0.65);
         var clampY = gsap.utils.clamp(br.top - baseT - h * 0.25, br.bottom - baseT - h * 0.75);
-        p.style.zIndex = ++topZ;
         try { p.setPointerCapture(e.pointerId); } catch (err) {}
         function move(ev) {
           var dx = ev.clientX - sx, dy = ev.clientY - sy;
-          if (!moved && Math.hypot(dx, dy) > 5) { moved = true; p.classList.add("is-drag"); gsap.to(tilt, { scale: 1.04, duration: 0.3, ease: "power2.out" }); }
-          if (!moved) return;
+          if (!moved) {
+            if (touch) {
+              if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { up(); return; } // es scroll: lo deja pasar
+              if (Math.abs(dx) < 10) return;
+            } else if (Math.hypot(dx, dy) <= 5) return;
+            moved = true;
+            gsap.killTweensOf(p);
+            x0 = gsap.getProperty(p, "x"); y0 = gsap.getProperty(p, "y"); sx = ev.clientX; sy = ev.clientY; dx = 0; dy = 0;
+            p.style.zIndex = ++topZ;
+            p.classList.add("is-drag");
+            gsap.to(tilt, { scale: 1.04, duration: 0.3, ease: "power2.out" });
+          }
           gsap.set(p, { x: clampX(x0 + dx), y: clampY(y0 + dy) });
           var now = performance.now(), dt = Math.max(8, now - lt);
           vx = (ev.clientX - lx) / dt; vy = (ev.clientY - ly) / dt; lx = ev.clientX; ly = ev.clientY; lt = now;
