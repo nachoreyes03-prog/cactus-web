@@ -354,9 +354,10 @@
   /* =======================================================================
      Movimiento (GSAP + ScrollTrigger + Lenis)
      ======================================================================= */
-  if (!hasGSAP) { root.classList.remove("js"); return; }
+  if (!hasGSAP) { root.classList.remove("js"); var rb = $("#works-reset"); if (rb) rb.hidden = true; return; }
   gsap.registerPlugin(ScrollTrigger);
   dragPieces(); // arrastrar anda siempre que haya GSAP
+  reorganize();
 
   if (!motion) { gsap.set(".hero__tag .w, .hl", { opacity: 1 }); return; }
 
@@ -427,6 +428,25 @@
 
   /* trabajos: se arrastran con el mouse o con el dedo (con inercia y un poco de giro).
      Con el dedo, si arrancás de costado movés la pieza; si arrancás para arriba o abajo, scrollea la página */
+  /* trabajos: "reorganizar" vuelve a poner cada pieza en su lugar, de a una y con un sacudón
+     (si no se había movido ninguna, igual se sacuden, así se nota que el botón respondió) */
+  function reorganize() {
+    var btn = $("#works-reset");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      pieces.forEach(function (p, i) {
+        var tilt = $(".piece__tilt", p), d = i * 0.05;
+        gsap.killTweensOf(p); gsap.killTweensOf(tilt);
+        p.style.zIndex = "";
+        if (!motion) { gsap.set(p, { x: 0, y: 0 }); gsap.set(tilt, { rotation: 0, scale: 1 }); return; }
+        gsap.to(p, { x: 0, y: 0, duration: 0.9, ease: "power3.inOut", delay: d });
+        gsap.timeline({ delay: d })
+          .to(tilt, { rotation: i % 2 ? 7 : -7, scale: 1.05, duration: 0.28, ease: "power2.out" })
+          .to(tilt, { rotation: 0, scale: 1, duration: 1, ease: "elastic.out(1, 0.45)" });
+      });
+    });
+  }
+
   function dragPieces() {
     var board = $("#board"), topZ = 10;
     pieces.forEach(function (p) {

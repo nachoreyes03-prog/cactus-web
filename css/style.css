@@ -333,7 +333,11 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
    ========================================================================= */
 .works { position: relative; padding: clamp(100px, 14vh, 170px) 0 clamp(50px, 7vh, 100px); overflow: hidden; }
 .works__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 24px; padding: 0 var(--gutter); }
-.works__hint { margin: 0 0 0.5rem; font-size: 1.02rem; font-weight: 300; color: var(--soft); }
+.works__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 0.5rem; }
+.works__hint { margin: 0; font-size: 1.02rem; font-weight: 300; color: var(--soft); }
+/* el botón de reorganizar: mismo estilo que "copiar" y "cerrar" */
+.works__reset { flex: none; padding: 0.55em 0.95em 0.6em; border: 2px solid rgba(246, 246, 246, 0.75); font-weight: 600; font-size: 0.95rem; line-height: 1; transition: background-color 0.25s, border-color 0.25s, color 0.25s; }
+.works__reset:hover, .works__reset:focus-visible { background: var(--lime); border-color: var(--lime); color: var(--ink); }
 .board { position: relative; width: 100%; aspect-ratio: 1440 / 1000; margin-top: clamp(16px, 3vh, 40px); }
 .piece {
   position: absolute;
