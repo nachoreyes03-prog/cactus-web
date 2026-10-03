@@ -112,17 +112,31 @@
       </div>
     </section>
 
-    <!-- el video de la marca (versión horizontal, en loop y sin sonido) separa "somos" de servicios.
-         El JS elige el archivo según la pantalla y lo pausa cuando no se ve. -->
-    <div class="vband" role="img" aria-label="Video de marca de cactus®">
-      <video class="vband__video" muted loop playsinline preload="none" poster="assets/video/cactus-gancho.jpg"
-             data-src-lg="assets/video/cactus-gancho-1080.mp4" data-src-sm="assets/video/cactus-gancho-540.mp4"></video>
-    </div>
+    <!-- banda de trama con el teléfono de la marca sonando y flechas para abajo: al tocarla baja a servicios -->
+    <a class="band band--call plx" data-plx="9" href="#servicios" aria-label="Bajar a servicios">
+      <svg class="band__bg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="1600" height="1000" fill="url(#trama-verde)"/></svg>
+      <span class="call" aria-hidden="true">
+        <span class="call__arrow"><svg viewBox="0 0 48 48"><path d="M24 7v31M11 25.5 24 38.5 37 25.5"/></svg></span>
+        <span class="call__phone">
+          <span class="call__ring call__ring--l"><svg viewBox="0 0 56 80"><path class="o" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/><path class="i" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/></svg></span>
+          <img src="assets/img/telefono.webp" width="704" height="1100" alt="" draggable="false">
+          <span class="call__ring call__ring--r"><svg viewBox="0 0 56 80"><path class="o" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/><path class="i" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/></svg></span>
+        </span>
+        <span class="call__arrow"><svg viewBox="0 0 48 48"><path d="M24 7v31M11 25.5 24 38.5 37 25.5"/></svg></span>
+      </span>
+    </a>
 
     <!-- ============ SERVICIOS (se pasa a blanco suave al llegar) ============ -->
     <section class="services" id="servicios">
       <div class="sec-head">
-        <h2 class="sec-title display rv">servicios</h2>
+        <!-- el cartel de "atención" va pegado al título, abajo a la derecha -->
+        <div class="srv-head">
+          <h2 class="sec-title display rv">servicios</h2>
+          <div class="warn rv">
+            <div class="warn__head"><svg class="warn__icon" viewBox="0 0 24 21" aria-hidden="true"><path d="M12 .8 23.3 20.4H.7Z"/><rect x="10.7" y="6.6" width="2.6" height="7.8" rx="1.1"/><circle cx="12" cy="17.1" r="1.6"/></svg> atención</div>
+            <p class="warn__body">Contiene diseño. Puede generar ganas de cambiar el logo, el packaging y la web.</p>
+          </div>
+        </div>
         <p class="sec-lead rv">Elegí uno o varios y consultanos todo junto por WhatsApp.</p>
       </div>
 
@@ -192,21 +206,16 @@
             </button></li>
           </ul>
 
-          <div class="warn rv">
-            <div class="warn__head"><svg class="warn__icon" viewBox="0 0 24 21" aria-hidden="true"><path d="M12 .8 23.3 20.4H.7Z"/><rect x="10.7" y="6.6" width="2.6" height="7.8" rx="1.1"/><circle cx="12" cy="17.1" r="1.6"/></svg> atención</div>
-            <p class="warn__body">Contiene diseño. Puede generar ganas de cambiar el logo, el packaging y la web.</p>
+          <!-- consulta general: queda quieta acá, abajo de la lista de multimedia -->
+          <div class="srv-cta rv">
+            <a class="srv-cta__btn" id="ask-btn" href="https://wa.me/5491163596278" target="_blank" rel="noopener">
+              <span>consultar por whatsapp</span>
+              <span class="srv-cta__n" data-ask-n hidden>0</span>
+              <span class="srv-cta__go" aria-hidden="true">→</span>
+            </a>
+            <p class="srv-cta__sel" id="ask-sel" aria-live="polite">Elegí uno o varios servicios y te armamos el mensaje.</p>
           </div>
         </div>
-      </div>
-
-      <!-- consulta general: queda quieta acá, abajo de la lista -->
-      <div class="srv-cta rv">
-        <a class="srv-cta__btn" id="ask-btn" href="https://wa.me/5491163596278" target="_blank" rel="noopener">
-          <span>consultar por whatsapp</span>
-          <span class="srv-cta__n" data-ask-n hidden>0</span>
-          <span aria-hidden="true">→</span>
-        </a>
-        <p class="srv-cta__sel" id="ask-sel" aria-live="polite">Elegí uno o varios servicios y te armamos el mensaje.</p>
       </div>
     </section>
 
@@ -224,6 +233,16 @@
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame"><img src="assets/img/udent/tapa.svg" width="800" height="1000" alt="U.Dent, identidad para un estudio dental" draggable="false"></div>
             <figcaption class="piece__tag"><b>U.Dent</b> <span>identidad · en proceso</span></figcaption>
+          </div></div>
+        </figure>
+        <!-- el video de marca: en la mesa corre sin sonido; al tocarlo se abre con sonido -->
+        <figure class="piece piece--video" style="--x:37;--y:57;--w:25;--r:-2" data-float="100" data-project="video" data-slide="0">
+          <div class="piece__float"><div class="piece__tilt">
+            <div class="piece__frame">
+              <video muted loop playsinline preload="none" width="960" height="540" poster="assets/video/cactus-gancho.jpg" data-src="assets/video/cactus-gancho-540.mp4" aria-hidden="true"></video>
+              <span class="piece__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></svg></span>
+            </div>
+            <figcaption class="piece__tag"><b>Video de marca</b> <span>motion</span></figcaption>
           </div></div>
         </figure>
         <figure class="piece" style="--x:27;--y:22;--w:15;--r:4" data-float="140" data-project="nosllaman" data-slide="0">
@@ -250,7 +269,7 @@
             <figcaption class="piece__tag"><b>cactus®</b> <span>logotipo</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:43;--y:57;--w:13;--r:-5" data-float="150" data-project="identidad" data-slide="2">
+        <figure class="piece" style="--x:84;--y:6;--w:12;--r:5" data-float="150" data-project="identidad" data-slide="2">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame"><img src="assets/img/trama-verde.webp" width="900" height="900" alt="Trama de la A estrella sobre verde" draggable="false" loading="lazy"></div>
             <figcaption class="piece__tag"><b>cactus®</b> <span>trama</span></figcaption>
@@ -267,7 +286,7 @@
 
     <!-- la misma trama marca dónde terminan los trabajos y arranca el contacto -->
     <div class="band plx" data-plx="9" aria-hidden="true">
-      <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice"><rect width="1600" height="1000" fill="url(#trama-verde)"/></svg>
+      <svg class="band__bg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice"><rect width="1600" height="1000" fill="url(#trama-verde)"/></svg>
     </div>
 
     <!-- ============ CONTACTO / FOOTER ============ -->

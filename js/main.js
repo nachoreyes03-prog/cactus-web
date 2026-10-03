@@ -1,5 +1,5 @@
 /* =========================================================================
-   cactus® · web · v4 · interacciones
+   cactus® · web · v7 · interacciones
    Las animaciones van siempre (como en juliamarro.com); se apagan con ?motion=0.
    ========================================================================= */
 (function () {
@@ -12,8 +12,22 @@
   };
 
   /* ---------- proyectos: lo que se abre al tocar un trabajo ----------
-     slides: { src, alt } para imágenes, o { html, alt } para láminas armadas con HTML. */
+     slides: { src, alt } para imágenes, { html, alt } para láminas armadas con HTML,
+     o { video, poster, w, h, alt } para videos (se reproducen con sonido al abrirse). */
   var PROJECTS = {
+    video: {
+      kind: "motion · manual de marca",
+      title: "Video de marca",
+      meta: [["cliente", "cactus®"], ["servicios", "motion, edición, reels"], ["formatos", "horizontal y reel"], ["año", "2026"]],
+      text: [
+        "El manual de marca de cactus® contado en 30 segundos. Arranca con un teléfono que suena: es tu marca preguntando por nosotros.",
+        "Después repasa el logotipo, la grilla, el monograma, las tipografías, los colores y la trama, y termina en las aplicaciones."
+      ],
+      slides: [
+        { video: "assets/video/cactus-video-1080.mp4", poster: "assets/video/cactus-gancho.jpg", w: 1920, h: 1080, alt: "Video de marca de cactus®, versión horizontal" },
+        { video: "assets/video/cactus-reel-720.mp4", poster: "assets/video/cactus-reel.jpg", w: 720, h: 1280, alt: "Video de marca de cactus®, versión reel" }
+      ]
+    },
     udent: {
       kind: "identidad de marca · en proceso",
       title: "U.Dent",
@@ -87,6 +101,12 @@
   var motion = root.classList.contains("motion");
   var lenis = null;
   var waUrl = function (text) { return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text); };
+  function playQuiet(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  // con sonido; si el navegador no lo deja, arranca en silencio (se activa desde los controles)
+  function playLoud(v) {
+    var p = v.play();
+    if (p && p.catch) p.catch(function (err) { if (err && err.name === "NotAllowedError") { v.muted = true; playQuiet(v); } });
+  }
 
   /* ---------- contacto ---------- */
   var year = $("#year");
@@ -143,16 +163,25 @@
     document.body.prepend(mark);
     new IntersectionObserver(function (en) { hdr.classList.toggle("is-solid", !en[0].isIntersecting); }).observe(mark);
 
-    // el video de marca: se carga recién cerca de la pantalla y se pausa cuando no se ve
-    var vid = $(".vband__video");
-    if (vid) {
-      new IntersectionObserver(function (en) {
-        if (en[0].isIntersecting) {
-          if (!vid.getAttribute("src")) vid.src = window.matchMedia("(max-width: 760px)").matches ? vid.dataset.srcSm : vid.dataset.srcLg;
-          var p = vid.play(); if (p && p.catch) p.catch(function () {});
-        } else if (!vid.paused) vid.pause();
-      }, { rootMargin: "25% 0px 25% 0px" }).observe(vid);
+    // el video de la mesa de trabajos: se carga recién cerca de la pantalla y se pausa cuando no se ve
+    if (motion) {
+      var vidIO = new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          var v = e.target;
+          v._inView = e.isIntersecting;
+          if (e.isIntersecting && !pvOpen) {
+            if (!v.getAttribute("src")) v.src = v.dataset.src;
+            playQuiet(v);
+          } else if (!v.paused) v.pause();
+        });
+      }, { rootMargin: "20% 0px 20% 0px" });
+      $$(".piece video").forEach(function (v) { vidIO.observe(v); });
     }
+
+    // el teléfono suena solo mientras la banda está en pantalla
+    $$(".band--call").forEach(function (b) {
+      new IntersectionObserver(function (en) { b.classList.toggle("is-off", !en[0].isIntersecting); }).observe(b);
+    });
 
     /* aparecer al scrollear: los que entran juntos salen escalonados */
     if (motion) {
@@ -188,7 +217,12 @@
   function pvGo(i) {
     if (!pvList.length) return;
     pvAt = (i + pvList.length) % pvList.length;
-    pvList.forEach(function (s, k) { s.classList.toggle("on", k === pvAt); });
+    pvList.forEach(function (s, k) {
+      s.classList.toggle("on", k === pvAt);
+      // los videos: el que queda a la vista arranca, los demás se pausan
+      var v = $("video", s);
+      if (v) { if (k === pvAt) playLoud(v); else if (!v.paused) v.pause(); }
+    });
     pvCount.textContent = pad(pvAt + 1) + " / " + pad(pvList.length);
     var single = pvList.length < 2;
     $$(".pv__nav").forEach(function (b) { b.hidden = single; });
@@ -203,6 +237,15 @@
       var f = document.createElement("figure");
       f.className = "pv__slide";
       if (s.html) { f.innerHTML = s.html; f.setAttribute("role", "img"); f.setAttribute("aria-label", s.alt || ""); }
+      else if (s.video) {
+        var v = document.createElement("video");
+        v.controls = true; v.playsInline = true; v.preload = "metadata";
+        if (s.w) { v.width = s.w; v.height = s.h; }
+        if (s.poster) v.poster = s.poster;
+        v.src = s.video;
+        v.setAttribute("aria-label", s.alt || "");
+        f.appendChild(v);
+      }
       else { var img = document.createElement("img"); img.src = s.src; img.alt = s.alt || ""; img.draggable = false; f.appendChild(img); }
       pvSlides.appendChild(f);
       return f;
@@ -212,6 +255,7 @@
     $("#pv-meta").innerHTML = p.meta.map(function (m) { return "<div><dt>" + m[0] + "</dt><dd>" + m[1] + "</dd></div>"; }).join("");
     $("#pv-text").innerHTML = p.text.map(function (t) { return "<p>" + t + "</p>"; }).join("");
     pv.hidden = false; pvOpen = true;
+    $$(".piece video").forEach(function (v) { if (!v.paused) v.pause(); });
     document.body.classList.add("no-scroll");
     if (lenis) lenis.stop();
     pvGo(slide || 0);
@@ -225,21 +269,25 @@
   function pvClose() {
     if (!pvOpen) return;
     pvOpen = false; pv.hidden = true;
+    $$("video", pvSlides).forEach(function (v) { v.pause(); });
+    if (motion) $$(".piece video").forEach(function (v) { if (v._inView && v.getAttribute("src")) playQuiet(v); });
     document.body.classList.remove("no-scroll");
     if (lenis) lenis.start();
     if (pvLast) pvLast.focus({ preventScroll: true });
   }
   $("#pv-x").addEventListener("click", pvClose);
   $$("[data-pv]").forEach(function (b) { b.addEventListener("click", function () { pvGo(pvAt + Number(b.dataset.pv)); }); });
-  pvSlides.addEventListener("click", function () { pvGo(pvAt + 1); });
+  // tocar la imagen pasa a la siguiente (en los videos, el toque es para sus controles)
+  pvSlides.addEventListener("click", function (e) { if (e.target.closest("video")) return; pvGo(pvAt + 1); });
   document.addEventListener("keydown", function (e) {
     if (!pvOpen) return;
     if (e.key === "Escape") pvClose();
+    if (e.target && e.target.tagName === "VIDEO") return; // las flechas adelantan o atrasan el video
     if (e.key === "ArrowRight") pvGo(pvAt + 1);
     if (e.key === "ArrowLeft") pvGo(pvAt - 1);
   });
   var tsx = null;
-  $("#pv-stage").addEventListener("touchstart", function (e) { tsx = e.touches[0].clientX; }, { passive: true });
+  $("#pv-stage").addEventListener("touchstart", function (e) { tsx = e.target.closest("video") ? null : e.touches[0].clientX; }, { passive: true });
   $("#pv-stage").addEventListener("touchend", function (e) {
     if (tsx == null) return;
     var dx = e.changedTouches[0].clientX - tsx; tsx = null;
@@ -293,14 +341,12 @@
       .from(".hl--r", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.4)" }, 1.05);
   }
 
-  /* imágenes que se deslizan adentro de su marco (la trama y el video) */
+  /* la trama se desliza adentro de su banda */
   function parallax() {
     $$(".plx").forEach(function (f) {
-      var el = $("img, svg", f), amt = Math.min(9.6, parseFloat(f.dataset.plx) || 8);
+      var el = $(".band__bg", f) || $("img, svg", f), amt = Math.min(9.6, parseFloat(f.dataset.plx) || 8);
       gsap.fromTo(el, { yPercent: -amt }, { yPercent: amt, ease: "none", scrollTrigger: { trigger: f, start: "top bottom", end: "bottom top", scrub: true } });
     });
-    var v = $(".vband__video");
-    if (v) gsap.fromTo(v, { yPercent: -2.5 }, { yPercent: 2.5, ease: "none", scrollTrigger: { trigger: ".vband", start: "top bottom", end: "bottom top", scrub: true } });
   }
 
   /* servicios: el fondo se funde de negro a blanco al llegar y vuelve a negro al irse */
@@ -318,7 +364,7 @@
   function floatPieces() {
     var board = $("#board"), small = window.innerWidth < 901;
     pieces.forEach(function (p) {
-      var fl = $(".piece__float", p), img = $(".piece__frame img", p);
+      var fl = $(".piece__float", p), img = $(".piece__frame img, .piece__frame video", p);
       var px = (parseFloat(p.dataset.float) || 60) * (small ? 0.35 : 1);
       gsap.fromTo(fl, { y: px }, { y: -px, ease: "none", scrollTrigger: { trigger: board, start: "top bottom", end: "bottom top", scrub: true } });
       gsap.set(img, { scale: 1.07 });

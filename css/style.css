@@ -186,8 +186,42 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .person:hover .person__url { color: var(--lime); }
 
 /* la trama a todo el ancho (la imagen se desliza adentro del marco) */
-.band { position: relative; height: clamp(240px, 44vh, 520px); overflow: hidden; }
-.band svg { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; max-width: none; will-change: transform; }
+.band { position: relative; display: block; height: clamp(240px, 44vh, 520px); overflow: hidden; }
+.band__bg { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; max-width: none; will-change: transform; }
+
+/* la banda del teléfono: suena (tiembla de a dos golpes) y las flechas marcan servicios, que está abajo */
+.band--call { cursor: pointer; text-decoration: none; }
+.band--call:focus-visible { outline: 4px solid var(--ink); outline-offset: -10px; }
+.call { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: clamp(22px, 7vw, 130px); }
+.call__phone { position: relative; height: 86%; }
+.call__phone img { height: 100%; width: auto; max-width: none; filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.5)); }
+.call__ring { position: absolute; top: 18%; width: 24%; }
+.call__ring--l { left: 16%; transform: scaleX(-1); }
+.call__ring--r { left: 88%; top: 15%; }
+.call__ring svg { display: block; width: 100%; height: auto; overflow: visible; fill: none; stroke-linecap: round; }
+.call__ring .o { stroke: var(--ink); stroke-width: 9; }
+.call__ring .i { stroke: var(--paper); stroke-width: 4; }
+.call__arrow { flex: none; width: clamp(58px, 6.6vw, 108px); aspect-ratio: 1; display: grid; place-items: center; background: var(--paper); border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); transition: background-color 0.25s; }
+.call__arrow svg { width: 58%; height: auto; fill: none; stroke: var(--ink); stroke-width: 6; stroke-linecap: square; transition: stroke 0.25s; }
+.band--call:hover .call__arrow { background: var(--ink); }
+.band--call:hover .call__arrow svg { stroke: var(--lime); }
+.motion .call__phone { transform-origin: 50% 85%; animation: callRing 2.4s infinite; }
+.motion .call__ring { opacity: 0; animation: callMark 2.4s infinite; }
+.motion .call__arrow svg { animation: callNudge 1.2s ease-in-out infinite; }
+.band--call.is-off .call * { animation-play-state: paused; }
+@keyframes callRing {
+  0%, 17%, 24%, 41%, 100% { transform: rotate(0deg); }
+  2%, 8%, 14%, 26%, 32%, 38% { transform: rotate(-6deg); }
+  5%, 11%, 29%, 35% { transform: rotate(6deg); }
+}
+@keyframes callMark {
+  0%, 44%, 100% { opacity: 0; }
+  2%, 40% { opacity: 1; }
+}
+@keyframes callNudge {
+  0%, 100% { transform: translateY(-13%); }
+  50% { transform: translateY(13%); }
+}
 
 /* =========================================================================
    TÍTULOS
@@ -253,26 +287,29 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .srv[aria-pressed="true"] .srv__check { background: var(--lime); }
 .srv[aria-pressed="true"] .srv__check::after { opacity: 1; }
 
-/* cartel de advertencia */
-.warn { margin-top: 2.8rem; max-width: 370px; border: 2.5px solid var(--ink); background: var(--paper); color: var(--ink); rotate: -2deg; }
+/* cartel de advertencia: pegado al título, abajo a la derecha */
+.srv-head { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 22px clamp(28px, 3.4vw, 64px); }
+.srv-head .warn { margin: 0 0 clamp(6px, 1.2vw, 20px); }
+.warn { width: 370px; max-width: 100%; border: 2.5px solid var(--ink); background: var(--paper); color: var(--ink); rotate: -2deg; }
 .warn__head { display: flex; align-items: center; gap: 0.5em; padding: 0.4em 0.7em 0.42em; background: var(--lime); border-bottom: 2.5px solid var(--ink); font-weight: 700; font-size: 1.3rem; line-height: 1; letter-spacing: -0.06em; text-transform: uppercase; }
 .warn__icon { flex: none; width: 1.08em; height: auto; margin-top: -0.06em; }
 .warn__icon path { fill: var(--ink); }
 .warn__icon rect, .warn__icon circle { fill: var(--lime); }
 .warn__body { margin: 0; padding: 0.75em 0.9em 0.85em; font-size: 0.92rem; font-weight: 500; line-height: 1.35; }
 
-/* consulta general: grande y quieta, abajo de la lista */
-.srv-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 18px clamp(24px, 3vw, 48px); margin-top: clamp(56px, 9vh, 110px); }
+/* consulta general: grande y quieta, abajo de la lista de multimedia (donde antes estaba el cartel) */
+.srv-cta { display: flex; flex-direction: column; align-items: stretch; gap: 18px; margin-top: clamp(30px, 3.4vw, 52px); }
 .srv-cta__btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.45em;
-  padding: 0.5em 0.8em 0.56em;
+  width: 100%;
+  padding: 0.55em 0.75em 0.6em;
   border: 3px solid var(--ink);
   background: var(--lime);
   color: var(--ink);
   font-weight: 700;
-  font-size: clamp(1.6rem, 3.6vw, 3.6rem);
+  font-size: clamp(1.5rem, 2.55vw, 2.9rem);
   line-height: 1;
   letter-spacing: -0.06em;
   white-space: nowrap;
@@ -280,15 +317,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   box-shadow: 8px 8px 0 var(--ink);
   transition: background-color 0.25s, color 0.25s;
 }
+.srv-cta__go { margin-left: auto; }
 .srv-cta__btn:hover { background: var(--ink); color: var(--lime); }
 .srv-cta__n { min-width: 1.5em; height: 1.5em; display: inline-grid; place-items: center; padding: 0 0.25em; background: var(--ink); color: var(--lime); font-size: 0.5em; letter-spacing: 0; transition: background-color 0.25s, color 0.25s; }
 .srv-cta__btn:hover .srv-cta__n { background: var(--lime); color: var(--ink); }
 .srv-cta__sel { margin: 0; max-width: 42ch; font-size: clamp(1rem, 1.3vw, 1.2rem); line-height: 1.45; }
 .srv-cta__sel b { font-weight: 700; }
-
-/* el video de marca a todo el ancho (16:9), con un parallax suave */
-.vband { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #111; }
-.vband__video { position: absolute; left: 0; top: -3%; width: 100%; height: 106%; object-fit: cover; will-change: transform; }
 
 /* =========================================================================
    TRABAJOS · piezas sueltas
@@ -312,7 +346,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .piece__tilt { position: relative; rotate: calc(var(--r) * 1deg); }
 .piece__frame { position: relative; overflow: hidden; background: #222; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.85); }
 .piece__frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(246, 246, 246, 0.14); pointer-events: none; }
-.piece__frame img { width: 100%; height: auto; pointer-events: none; -webkit-user-drag: none; }
+.piece__frame img, .piece__frame video { display: block; width: 100%; height: auto; pointer-events: none; -webkit-user-drag: none; }
+.piece--video .piece__frame { background: #191919; }
+/* el sello de "play" en la pieza del video */
+.piece__play { position: absolute; right: 10px; bottom: 10px; z-index: 1; width: clamp(34px, 2.6vw, 44px); aspect-ratio: 1; display: grid; place-items: center; background: var(--lime); border: 2px solid var(--ink); }
+.piece__play svg { width: 54%; height: auto; fill: var(--ink); }
 .piece__tag {
   position: absolute;
   left: -0.6rem;
@@ -352,6 +390,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: absolute;
   inset: clamp(24px, 5vw, 80px) clamp(70px, 6vw, 96px);
   display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr); /* así las imágenes altas (afiches, reel) entran enteras */
   place-items: center;
   margin: 0;
   opacity: 0;
@@ -359,7 +398,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transition: opacity 0.55s var(--ease), visibility 0s 0.55s;
 }
 .pv__slide.on { opacity: 1; visibility: visible; transition: opacity 0.55s var(--ease); }
-.pv__slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; outline: 1px solid rgba(246, 246, 246, 0.1); box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9); }
+.pv__slide img, .pv__slide video { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; outline: 1px solid rgba(246, 246, 246, 0.1); box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9); }
+.pv__slide video { display: block; background: #000; }
 /* imágenes armadas con HTML (por ejemplo, el sistema tipográfico de U.Dent) */
 .sys { width: min(100%, 1000px); aspect-ratio: 16 / 10; display: flex; flex-direction: column; justify-content: center; gap: 0.32em; padding: 7%; background: #fff; color: #111110; font-size: clamp(1.3rem, 3.1vw, 3.6rem); line-height: 1.05; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9); }
 .sys p { margin: 0; letter-spacing: -0.02em; }
@@ -444,6 +484,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .somos__body { margin-top: 26px; }
   .somos__team { margin-top: 44px; }
   .services__cols { grid-template-columns: 1fr; }
+  .srv-head .warn { margin-left: auto; }
 
   /* trabajos en mobile: collage en columna, se tocan para ver el proyecto */
   .board { aspect-ratio: auto; display: flex; flex-direction: column; padding: 8px var(--gutter) 40px; }
@@ -473,7 +514,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .btn { font-size: 0.85rem; padding: 0.5em 0.75em 0.55em; }
   .srv__check { width: 30px; height: 30px; }
   .srv__check::after { width: 9px; height: 16px; border-width: 0 3.5px 3.5px 0; }
-  .srv-cta__btn { width: 100%; justify-content: space-between; font-size: 5.6vw; white-space: normal; box-shadow: 6px 6px 0 var(--ink); }
+  .srv-head .warn { width: min(330px, 86%); margin: 0 4px 0 auto; }
+  .srv-cta__btn { font-size: 5.6vw; white-space: normal; box-shadow: 6px 6px 0 var(--ink); }
+  .call { gap: 18px; }
+  .call__phone { height: 74%; }
+  .call__arrow { width: 54px; border-width: 2.5px; box-shadow: 4px 4px 0 var(--ink); }
+  .call__phone img { filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.5)); }
   .ct a { grid-template-columns: 1fr; gap: 2px; }
   .ct b { font-size: 6vw; overflow-wrap: normal; }
   .ct__mail { flex-direction: column; align-items: flex-start; gap: 0; }
