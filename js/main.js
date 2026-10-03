@@ -342,6 +342,9 @@
   });
 
   var pieces = $$(".piece");
+  // en pantallas táctiles la ayuda explica que se mantienen apretados para moverlos
+  var hint = $(".works__hint");
+  if (hint && window.matchMedia("(hover: none) and (pointer: coarse)").matches) { hint.textContent = "mantenelos apretados para moverlos o tocalos para ver el proyecto"; noWidow(hint); }
   pieces.forEach(function (p) {
     p.setAttribute("tabindex", "0");
     p.setAttribute("role", "button");
@@ -386,7 +389,7 @@
     gsap.set(".hl", { opacity: 1 });
     gsap.timeline({ defaults: { ease: "expo.out" } })
       .from(".hl:not(.hl--r)", { y: 400, duration: 1.3, stagger: 0.07 }, 0.2)
-      .from(".hl--r", { scale: 0, transformOrigin: "50% 50%", duration: 0.7, ease: "back.out(2.4)" }, 1.05);
+      .from(".hl--r", { scale: 0, svgOrigin: "1379.7 30.2", duration: 0.7, ease: "back.out(2.4)" }, 1.05); // el ® crece desde su centro
   }
 
   /* la trama se desliza adentro de su banda */
@@ -459,37 +462,54 @@
     var board = $("#board"), topZ = 10;
     pieces.forEach(function (p) {
       var tilt = $(".piece__tilt", p);
+      // mientras una pieza está agarrada con el dedo, la página no scrollea
+      p.addEventListener("touchmove", function (te) { if (p._holding) te.preventDefault(); }, { passive: false });
+      p.addEventListener("contextmenu", function (ce) { if (p._holding || ce.pointerType === "touch") ce.preventDefault(); });
       p.addEventListener("pointerdown", function (e) {
         var touch = e.pointerType !== "mouse";
         if (!touch && e.button !== 0) return;
         if (!touch) e.preventDefault();
         var x0 = gsap.getProperty(p, "x"), y0 = gsap.getProperty(p, "y");
-        var sx = e.clientX, sy = e.clientY, lx = sx, lt = performance.now(), vx = 0, vy = 0, ly = sy, moved = false;
+        var sx = e.clientX, sy = e.clientY, lx = sx, lt = performance.now(), vx = 0, vy = 0, ly = sy, moved = false, hold = null;
         var br = board.getBoundingClientRect(), pr = p.getBoundingClientRect();
         var baseL = pr.left - x0, baseT = pr.top - y0, w = pr.width, h = pr.height;
         var clampX = gsap.utils.clamp(br.left - baseL - w * 0.35, br.right - baseL - w * 0.65);
         var clampY = gsap.utils.clamp(br.top - baseT - h * 0.25, br.bottom - baseT - h * 0.75);
         try { p.setPointerCapture(e.pointerId); } catch (err) {}
+        // agarra la pieza: desde acá se mueve con el dedo o el mouse
+        function grab(x, y) {
+          moved = true; p._holding = true;
+          gsap.killTweensOf(p);
+          x0 = gsap.getProperty(p, "x"); y0 = gsap.getProperty(p, "y"); sx = x; sy = y;
+          p.style.zIndex = ++topZ;
+          p.classList.add("is-drag");
+          gsap.to(tilt, { scale: touch ? 1.08 : 1.04, duration: 0.3, ease: "back.out(2)" });
+        }
+        // con el dedo: si la dejás apretada un ratito, se levanta y se mueve para cualquier lado
+        if (touch) hold = setTimeout(function () {
+          hold = null;
+          if (moved) return;
+          grab(lx, ly);
+          if (navigator.vibrate) navigator.vibrate(12);
+        }, 260);
         function move(ev) {
-          var dx = ev.clientX - sx, dy = ev.clientY - sy;
           if (!moved) {
+            var mx = ev.clientX - sx, my = ev.clientY - sy;
             if (touch) {
-              if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { up(); return; } // es scroll: lo deja pasar
-              if (Math.abs(dx) < 10) return;
-            } else if (Math.hypot(dx, dy) <= 5) return;
-            moved = true;
-            gsap.killTweensOf(p);
-            x0 = gsap.getProperty(p, "x"); y0 = gsap.getProperty(p, "y"); sx = ev.clientX; sy = ev.clientY; dx = 0; dy = 0;
-            p.style.zIndex = ++topZ;
-            p.classList.add("is-drag");
-            gsap.to(tilt, { scale: 1.04, duration: 0.3, ease: "power2.out" });
+              if (Math.abs(mx) > 10 || Math.abs(my) > 10) { clearTimeout(hold); hold = null; }
+              if (Math.abs(my) > 10 && Math.abs(my) > Math.abs(mx)) { up(); return; } // deslizó rápido para arriba o abajo: scrollea
+              if (Math.abs(mx) < 10) { lx = ev.clientX; ly = ev.clientY; return; }
+            } else if (Math.hypot(mx, my) <= 5) return;
+            grab(ev.clientX, ev.clientY); // de costado (o con el mouse) se agarra al toque
           }
+          var dx = ev.clientX - sx, dy = ev.clientY - sy;
           gsap.set(p, { x: clampX(x0 + dx), y: clampY(y0 + dy) });
           var now = performance.now(), dt = Math.max(8, now - lt);
           vx = (ev.clientX - lx) / dt; vy = (ev.clientY - ly) / dt; lx = ev.clientX; ly = ev.clientY; lt = now;
           gsap.to(tilt, { rotation: gsap.utils.clamp(-12, 12, vx * 8), duration: 0.35, ease: "power2.out", overwrite: "auto" });
         }
         function up() {
+          clearTimeout(hold); hold = null; p._holding = false;
           p.removeEventListener("pointermove", move);
           p.removeEventListener("pointerup", up);
           p.removeEventListener("pointercancel", up);

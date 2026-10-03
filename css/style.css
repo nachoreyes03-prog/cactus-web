@@ -189,30 +189,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .band { position: relative; display: block; height: clamp(240px, 44vh, 520px); overflow: hidden; }
 .band__bg { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; max-width: none; will-change: transform; }
 
-/* la banda del teléfono (sale del frame "manga final"): todo se mide con el alto de la banda (--bh),
-   así en el celu las flechas son más chicas y entran más, en vez de verse con zoom.
-   Las flechas salen del teléfono hacia los costados y se cortan en el borde de la pantalla. */
-.band--call {
-  --bh: clamp(100px, 13vw, 210px);
-  --gap: 0.3;
-  --call-bg: var(--paper);
-  height: var(--bh);
-  background: var(--call-bg);
-  cursor: pointer;
-  text-decoration: none;
-}
-.band--call:focus-visible { outline: 4px solid var(--ink); outline-offset: -10px; }
-.call { position: absolute; inset: 0; display: flex; justify-content: center; }
-.call__side { flex: 1 1 0; min-width: 0; display: flex; gap: calc(var(--bh) * var(--gap)); overflow: hidden; }
-.call__side--l { justify-content: flex-end; }
-.call__arrow { flex: none; width: calc(var(--bh) * 0.5057); height: 100%; fill: var(--ink); }
-.call__tel { flex: none; width: calc(var(--bh) * 1.0553); height: 100%; overflow: visible; margin: 0 calc(var(--bh) * 0.08); }
+/* el teléfono de la marca sonando, solo sobre el negro (como arranca el gancho del video), entre "somos" y servicios */
+.callspot { display: block; width: fit-content; margin: 0 auto; padding: clamp(8px, 2vw, 30px) 0; cursor: pointer; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.callspot:focus-visible { outline: 3px solid var(--lime); outline-offset: 6px; }
+.call__tel { display: block; height: clamp(210px, 25vw, 380px); width: auto; aspect-ratio: 420 / 398; overflow: visible; }
 /* el teléfono tiembla de a dos golpes alrededor de la base (en las medidas de la imagen: 352, 935) */
 .call__phone { transform-origin: 352px 935px; }
 .call__phone image { filter: drop-shadow(0 30px 34px rgba(0, 0, 0, 0.42)); }
 .motion .call__phone { animation: callRing 2.4s infinite; }
 .motion .call__ring { opacity: 0; animation: callMark 2.4s infinite; }
-.band--call.is-off .call * { animation-play-state: paused; }
+.band--call.is-off * { animation-play-state: paused; }
 @keyframes callRing {
   0%, 17%, 24%, 41%, 100% { transform: rotate(0deg); }
   2%, 8%, 14%, 26%, 32%, 38% { transform: rotate(-6deg); }
@@ -363,6 +349,7 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   margin: 0;
   cursor: grab;
   touch-action: pan-y;
+  -webkit-touch-callout: none;
   -webkit-user-select: none;
           user-select: none;
 }
@@ -566,9 +553,8 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   .person__logo { height: 44px; }
   .person__url { font-size: 0.8rem; }
   /* la última banda de trama, más baja */
-  .band:not(.band--call) { height: 120px; }
+  .band { height: 120px; }
   .srv-cta__btn { font-size: 5.6vw; white-space: normal; box-shadow: 6px 6px 0 var(--ink); }
-  .band--call { --gap: 0.2; }
   .ct a { grid-template-columns: 1fr; gap: 2px; }
   .ct b { font-size: 6vw; overflow-wrap: normal; }
   .ct__mail { flex-direction: column; align-items: flex-start; gap: 0; }
