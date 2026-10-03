@@ -15,7 +15,7 @@
   <!-- Poppins 400-700 van locales (assets/fonts); la Light y la Light Italic del manual vienen de Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap">
   <link rel="preload" href="assets/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/style.css?v=9">
   <script>
     (function () {
       var d = document.documentElement;
@@ -112,15 +112,17 @@
       </div>
     </section>
 
-    <!-- banda de flechas gordas para abajo con el teléfono de la marca sonando: al tocarla baja a servicios -->
-    <a class="band band--call plx" data-plx="9" href="#servicios" aria-label="Bajar a servicios">
-      <span class="band__bg band__bg--arrows" aria-hidden="true"></span>
+    <!-- banda verde con flechas negras largas (de borde a borde) y el teléfono de la marca sonando: al tocarla baja a servicios.
+         Son 5 flechas por lado; en pantallas más chicas se ven menos -->
+    <a class="band band--call" href="#servicios" aria-label="Bajar a servicios">
       <span class="call" aria-hidden="true">
+        <span class="call__arrows"><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span></span>
         <span class="call__phone">
           <span class="call__ring call__ring--l"><svg viewBox="0 0 56 80"><path class="o" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/><path class="i" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/></svg></span>
           <img src="assets/img/telefono.webp" width="704" height="1100" alt="" draggable="false">
           <span class="call__ring call__ring--r"><svg viewBox="0 0 56 80"><path class="o" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/><path class="i" d="M12.3 29.7A16 16 0 0 1 12.3 50.3M23 20.7A30 30 0 0 1 23 59.3M33.7 11.7A44 44 0 0 1 33.7 68.3"/></svg></span>
         </span>
+        <span class="call__arrows"><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span><span class="call__arrow"></span></span>
       </span>
     </a>
 
@@ -322,6 +324,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-  <script src="js/main.js?v=8"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>

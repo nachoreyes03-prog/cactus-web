@@ -189,22 +189,32 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .band { position: relative; display: block; height: clamp(240px, 44vh, 520px); overflow: hidden; }
 .band__bg { position: absolute; left: 0; top: -12%; width: 100%; height: 124%; max-width: none; will-change: transform; }
 
-/* la banda del teléfono: un campo de flechas gordas (del grosor de la Poppins Bold) que apuntan a servicios,
-   y el teléfono sonando (tiembla de a dos golpes, con los rings en verde) */
-.band--call { height: clamp(200px, 34vh, 400px); background: var(--ink); cursor: pointer; text-decoration: none; }
-.band--call:focus-visible { outline: 4px solid var(--lime); outline-offset: -10px; }
-.band__bg--arrows {
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 140'%3E%3Cg fill='%237BE600'%3E%3Cpath transform='translate(9 14) scale(.42)' d='M39.5 6H60.5V53.8L75.2 39.2L90 54L50 94L10 54L24.8 39.2L39.5 53.8Z'/%3E%3Cpath transform='translate(69 14) scale(.42)' d='M39.5 6H60.5V53.8L75.2 39.2L90 54L50 94L10 54L24.8 39.2L39.5 53.8Z'/%3E%3Cpath transform='translate(-21 84) scale(.42)' d='M39.5 6H60.5V53.8L75.2 39.2L90 54L50 94L10 54L24.8 39.2L39.5 53.8Z'/%3E%3Cpath transform='translate(39 84) scale(.42)' d='M39.5 6H60.5V53.8L75.2 39.2L90 54L50 94L10 54L24.8 39.2L39.5 53.8Z'/%3E%3Cpath transform='translate(99 84) scale(.42)' d='M39.5 6H60.5V53.8L75.2 39.2L90 54L50 94L10 54L24.8 39.2L39.5 53.8Z'/%3E%3C/g%3E%3C/svg%3E") 50% 0 / clamp(104px, 9.4vw, 160px) auto repeat;
+/* la banda del teléfono: verde, con flechas negras largas (de borde a borde, gruesas como la Poppins Bold)
+   que apuntan a servicios, y el teléfono sonando (tiembla de a dos golpes, con los rings en verde) */
+.band--call { --aw: clamp(48px, 5.85vw, 100px); height: clamp(200px, 34vh, 400px); background: var(--lime); cursor: pointer; text-decoration: none; }
+.band--call:focus-visible { outline: 4px solid var(--ink); outline-offset: -10px; }
+.call { position: absolute; inset: 0; display: flex; justify-content: center; }
+.call__arrows { flex: 1; display: flex; justify-content: space-evenly; }
+/* cada flecha: el palo baja desde el borde de arriba y la punta toca el de abajo */
+.call__arrow { position: relative; flex: none; width: var(--aw); }
+.call__arrow::before { content: ""; position: absolute; left: 34%; width: 32%; top: 0; bottom: calc(var(--aw) * 0.6863 - 1px); background: var(--ink); }
+.call__arrow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  aspect-ratio: 100 / 68.63;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 68.63'%3E%3Cpath fill='%23191919' d='M34 0H66V7.37L73.37 0L96 22.63L50 68.63L4 22.63L26.63 0L34 7.37Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
 }
-.call { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-.call__phone { position: relative; height: 88%; }
-.call__phone img { height: 100%; width: auto; max-width: none; filter: drop-shadow(0 14px 16px rgba(0, 0, 0, 0.75)); }
+.call__phone { position: relative; flex: none; align-self: center; height: 88%; margin: 0 clamp(12px, 2.2vw, 40px) 0 clamp(4px, 1vw, 16px); }
+.call__phone img { height: 100%; width: auto; max-width: none; filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.42)); }
 .call__ring { position: absolute; top: 18%; width: 24%; }
 .call__ring--l { left: 16%; transform: scaleX(-1); }
 .call__ring--r { left: 88%; top: 15%; }
 .call__ring svg { display: block; width: 100%; height: auto; overflow: visible; fill: none; stroke-linecap: round; }
-.call__ring .o { stroke: var(--ink); stroke-width: 11; }
-.call__ring .i { stroke: var(--lime); stroke-width: 5.5; }
+.call__ring .o { stroke: var(--ink); stroke-width: 13; }
+.call__ring .i { stroke: var(--lime); stroke-width: 6.5; }
 .motion .call__phone { transform-origin: 50% 85%; animation: callRing 2.4s infinite; }
 .motion .call__ring { opacity: 0; animation: callMark 2.4s infinite; }
 .band--call.is-off .call * { animation-play-state: paused; }
@@ -286,7 +296,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .srv-head { display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: clamp(28px, 3.4vw, 64px); }
 .srv-head .sec-title { grid-area: 1 / 1; }
 .srv-head .sec-lead { grid-area: 2 / 1; }
-.srv-head .warn { grid-area: 1 / 2 / 3 / 3; align-self: center; translate: 0 clamp(4px, 0.9vw, 14px); }
+.srv-head .warn { grid-area: 1 / 2 / 3 / 3; align-self: end; translate: 0 clamp(6px, 1.4vw, 24px); }
 .warn { width: 370px; max-width: 100%; border: 2.5px solid var(--ink); background: var(--paper); color: var(--ink); rotate: -2deg; }
 .warn__head { display: flex; align-items: center; gap: 0.5em; padding: 0.4em 0.7em 0.42em; background: var(--lime); border-bottom: 2.5px solid var(--ink); font-weight: 700; font-size: 1.3rem; line-height: 1; letter-spacing: -0.06em; text-transform: uppercase; }
 .warn__icon { flex: none; width: 1.08em; height: auto; margin-top: -0.06em; }
@@ -475,6 +485,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    ========================================================================= */
 @media (max-width: 1100px) {
   .srv { grid-template-columns: 2.8rem minmax(0, 1fr) auto; }
+  .call__arrow:nth-child(n+4) { display: none; } /* 3 flechas por lado */
 }
 
 @media (max-width: 900px) {
@@ -516,8 +527,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .srv-head .warn { grid-area: 2 / 1; justify-self: end; width: min(330px, 86%); margin: 20px 4px 0 0; translate: none; }
   .srv-head .sec-lead { grid-area: 3 / 1; }
   .srv-cta__btn { font-size: 5.6vw; white-space: normal; box-shadow: 6px 6px 0 var(--ink); }
-  .call__phone { height: 86%; }
-  .call__phone img { filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.5)); }
+  .band--call { --aw: 46px; }
+  .call__arrow:nth-child(n+3) { display: none; } /* 2 flechas por lado */
+  .call__phone { height: 76%; margin: 0 6px 0 0; }
+  .call__phone img { filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.4)); }
   .ct a { grid-template-columns: 1fr; gap: 2px; }
   .ct b { font-size: 6vw; overflow-wrap: normal; }
   .ct__mail { flex-direction: column; align-items: flex-start; gap: 0; }
