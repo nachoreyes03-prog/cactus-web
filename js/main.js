@@ -12,9 +12,9 @@
   };
 
   /* ---------- proyectos: lo que se abre al tocar un trabajo ----------
-     slides: { src, w, h, alt } para imágenes o { video, poster, w, h, alt } para videos (se reproducen con sonido al abrirse).
-     g = la parte del proyecto (video, manual, redes…): arma los botones de arriba del visor.
-     tall: true = pieza larga que se recorre bajando (tw = ancho máximo en px). */
+     slides: { src, w, h, alt } para imágenes o { video, poster, w, h, alt } para videos (arrancan con sonido, a la mitad de volumen).
+     g = la parte del proyecto (video, reel, manual, redes…): arma los botones que van abajo del texto.
+     tall: true = pieza larga que se recorre bajando (tw = ancho máximo en px). loop: true = video que se repite solo. */
   var PROJECTS = {
     cactus: {
       kind: "identidad propia · manual y video",
@@ -56,13 +56,12 @@
       ]
     },
     julia: {
-      kind: "web · arte de disco",
+      kind: "arte de disco · tipografía · web",
       title: "Julia Marro",
-      meta: [["cliente", "Julia Marro"], ["servicios", "diseño web, arte de disco"], ["sitio", "<a href=\"https://juliamarro.com\" target=\"_blank\" rel=\"noopener\">juliamarro.com</a>"], ["año", "2026"]],
+      meta: [["cliente", "Julia Marro"], ["servicios", "arte de disco, tipografía, diseño web"], ["sitio", "<a href=\"https://juliamarro.com\" target=\"_blank\" rel=\"noopener\">juliamarro.com</a>"], ["año", "2026"]],
       text: [
-        "Para Julia Marro, productora y artista de Buenos Aires, hicimos juliamarro.com: su portfolio y su disco en una sola página. Fondo negro, las fotos ponen el color y hay un solo reproductor para todo el sitio.",
-        "El bloque del disco es la tapa de Boston a BSAS hecha sitio: los autos pasan por atrás del cartel y prenden el grafiti, y al pasar el mouse por la foto el collage se destapa a color.",
-        "También hicimos el arte: la tapa es un cartel porteño con el collage adentro y la contratapa lleva los temas escritos a mano. Esa misma letra titula cada tema en la web: un clic y suena, con su onda y sus créditos."
+        "A Julia Marro, productora y artista de Buenos Aires, le hicimos todo lo de su disco Boston a BSAS: la tapa, el collage, la contratapa y una tipografía pensada para ella. También su web, juliamarro.com.",
+        "La web es su portfolio y su disco en una sola página. El bloque del disco es la tapa hecha sitio: los autos pasan por atrás del cartel, la foto se destapa a color con el mouse y los temas, escritos con su tipografía, suenan con un clic."
       ],
       slides: [
         { video: "assets/trabajos/julia/julia-web-y-disco.mp4", poster: "assets/trabajos/julia/julia-web-y-disco-poster.jpg", w: 1440, h: 810, g: "video", alt: "Video: recorrido por juliamarro.com y el arte del disco Boston a BSAS, con carteles que cuentan cómo se hizo" },
@@ -146,39 +145,57 @@
       title: "Tallo Verde",
       meta: [["cliente", "Tallo Verde"], ["servicios", "diseño web, redes, newsletters"], ["sitio", "<a href=\"https://talloverde.com\" target=\"_blank\" rel=\"noopener\">talloverde.com</a>"], ["año", "2026"]],
       text: [
-        "La web, las redes y los newsletters de Tallo Verde, una huerta orgánica que vende por internet. Todo sale de una misma guía: dos colores (crema y verde), títulos en Poppins Bold con Georgia Bold Italic y una ilustración para cada categoría de la tienda.",
+        "La web, las redes y los newsletters de Tallo Verde, una huerta orgánica que vende por internet. Todo sale de los mismos parámetros: dos colores (crema y verde), títulos en Poppins Bold con Georgia Bold Italic y una ilustración para cada categoría de la tienda.",
         "En talloverde.com esas ilustraciones ordenan la compra: promociones, frutas, hortalizas, almacén, granja, aromáticas y mermeladas. Después vuelven en los posteos, en las historias y en los newsletters que anunciaron la web nueva."
       ],
       slides: [
         { video: "assets/trabajos/talloverde/talloverde-video.mp4", poster: "assets/trabajos/talloverde/talloverde-video-poster.jpg", w: 1920, h: 1080, g: "video", alt: "Video del caso Tallo Verde: la guía de marca, la web talloverde.com, los posteos e historias y los newsletters" },
-        { src: "assets/trabajos/talloverde/guia-figma.webp", w: 1746, h: 2000, g: "guía", alt: "Guía de Tallo Verde: los dos colores, el logo, las tipografías, la aplicación en la web y el estilo de ilustración" },
-        { src: "assets/trabajos/talloverde/guia-ilustraciones.webp", w: 1920, h: 1080, g: "guía", alt: "Las siete ilustraciones de Tallo Verde: la caja de frutas y verduras, manzanas, acelga, miel, huevos, ají molido y mermelada" },
-        { src: "assets/trabajos/talloverde/web-inicio.webp", w: 1600, h: 2354, g: "web", tall: true, tw: 1000, alt: "Inicio de talloverde.com: portada «De la huerta a tu casa», las categorías ilustradas y el pie" },
-        { src: "assets/trabajos/talloverde/web-frutas.webp", w: 1600, h: 2600, g: "web", tall: true, tw: 1000, alt: "Página de la categoría frutas en talloverde.com, con los productos y sus precios" },
-        { src: "assets/trabajos/talloverde/web-celular.webp", w: 1420, h: 1978, g: "web", alt: "talloverde.com en el celular: el inicio completo y la categoría frutas con tres filas de productos" },
+        { video: "assets/trabajos/talloverde/talloverde-redes.mp4", poster: "assets/trabajos/talloverde/talloverde-redes-poster.jpg", w: 1280, h: 720, g: "redes", loop: true, alt: "Los posteos de Tallo Verde en un muro que se mueve: las placas del feed en cinco columnas" },
         { src: "assets/trabajos/talloverde/redes-grilla.webp", w: 1622, h: 2000, g: "redes", alt: "Nueve posteos de Tallo Verde en grilla de tres por tres" },
         { src: "assets/trabajos/talloverde/redes-historias.webp", w: 1920, h: 679, g: "redes", alt: "Cinco historias de Tallo Verde: armá tu semana, agarrá el que necesites, llegó la primavera, quiz rápido y dato curioso" },
         { src: "assets/trabajos/talloverde/redes-nueva-web.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «Nueva web, ¡nos renovamos!» con las ilustraciones de los productos saliendo de una ventana de navegador" },
         { src: "assets/trabajos/talloverde/redes-hay-brocoli.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «Hay brócoli»: un papel con la silueta de un brócoli recortada sobre una foto de brócolis" },
         { src: "assets/trabajos/talloverde/redes-frutos-secos.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo sobre frutos secos: un anillo de frutos secos con el dato «20%» en el centro" },
         { src: "assets/trabajos/talloverde/redes-ticket.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «conseguilos en Tallo Verde»: un ticket de compra apoyado sobre una canasta de frutas y verduras" },
-        { src: "assets/trabajos/talloverde/newsletter-los-tres.webp", w: 1820, h: 1941, g: "newsletter", alt: "Los tres newsletters de Tallo Verde uno al lado del otro: el general y los dos de lanzamiento de la web" },
-        { src: "assets/trabajos/talloverde/newsletter-lanzamiento.webp", w: 1212, h: 4131, g: "newsletter", tall: true, tw: 640, alt: "Newsletter de lanzamiento de la web: «Comprar online es así de simple», los tres pasos, las ofertas y el catálogo" }
+        { src: "assets/trabajos/talloverde/newsletter-general.webp", w: 1212, h: 3858, g: "newsletter", tall: true, tw: 640, alt: "Newsletter general de Tallo Verde: De la huerta a tu casa, cómo funciona y los productos" },
+        { src: "assets/trabajos/talloverde/newsletter-lanzamiento.webp", w: 1212, h: 4131, g: "newsletter", tall: true, tw: 640, alt: "Newsletter de lanzamiento de la web nueva de Tallo Verde: comprar online es así de simple" },
+        { src: "assets/trabajos/talloverde/newsletter-lanzamiento-vol2.webp", w: 1212, h: 3322, g: "newsletter", tall: true, tw: 640, alt: "Segundo newsletter de lanzamiento de Tallo Verde: elegí, armá y recibí" }
       ]
     },
-    stopmotion: {
-      kind: "animación",
-      title: "Stop motion",
-      meta: [["de", "Atus y Kmi"], ["piezas", "Scott Pilgrim, Julián Álvarez, Puertas"]],
+    scott: {
+      kind: "stop motion",
+      title: "Scott Pilgrim",
+      meta: [["de", "Atus y Kmi"], ["técnica", "stop motion"]],
       text: [
-        "Tres piezas de stop motion de Atus y Kmi.",
-        "En Scott Pilgrim y en Julián Álvarez cada cuadro tiene dibujo y texto encima de la imagen: palabras que aparecen de a una, una telaraña sobre la cancha, un corazón entre el público.",
-        "Puertas recorre puertas pintadas de Barcelona, una por cuadro, y cierra con la firma de los dos."
+        "Un stop motion que hicimos con Cami sobre escenas de Scott Pilgrim.",
+        "Cada cuadro lleva dibujo y texto encima de la imagen: palabras que aparecen de a una, garabatos sobre la banda y un corazón entre el público."
       ],
       slides: [
-        { video: "assets/trabajos/stopmotion/scott-pilgrim.mp4", poster: "assets/trabajos/stopmotion/scott-pilgrim.jpg", w: 1920, h: 1080, g: "scott pilgrim", alt: "Stop motion sobre cuadros de Scott Pilgrim con trama de imprenta, dibujados y escritos encima: la banda en el escenario, Scott y Ramona entre el público, palabras como that guy on bass, oh yeah y hello again friend of a friend, y la firma de Atus Kmi al final" },
-        { video: "assets/trabajos/stopmotion/julian-alvarez.mp4", poster: "assets/trabajos/stopmotion/julian-alvarez.jpg", w: 1280, h: 720, g: "julián álvarez", alt: "Stop motion sobre cuadros de un partido de la selección argentina con trama de imprenta, dibujados encima: La Araña escrito sobre la cancha, una telaraña, la corrida con la pelota, el arco, el festejo y la firma Atus Kmi" },
-        { video: "assets/trabajos/stopmotion/puertas.mp4", poster: "assets/trabajos/stopmotion/puertas.jpg", w: 608, h: 1080, g: "puertas", alt: "Stop motion con fotos de puertas de Barcelona cubiertas de grafitis y stickers, una por cuadro, que termina con la firma de Atus Kmi dentro de una puerta dibujada en blanco y negro" }
+        { video: "assets/trabajos/stopmotion/scott-pilgrim.mp4", poster: "assets/trabajos/stopmotion/scott-pilgrim.jpg", w: 1920, h: 1080, alt: "Stop motion sobre cuadros de Scott Pilgrim con trama de imprenta, dibujados y escritos encima: la banda en el escenario, Scott y Ramona entre el público, palabras como that guy on bass, oh yeah y hello again friend of a friend, y la firma de Atus Kmi al final" }
+      ]
+    },
+    julian: {
+      kind: "stop motion",
+      title: "Julián Álvarez",
+      meta: [["de", "Atus y Kmi"], ["técnica", "stop motion"]],
+      text: [
+        "Un stop motion que hicimos con Cami sobre un gol de Julián Álvarez.",
+        "Cada cuadro lleva dibujo encima de la imagen: \"La Araña\" escrito sobre la cancha, una telaraña alrededor de la jugada, el remate y el festejo."
+      ],
+      slides: [
+        { video: "assets/trabajos/stopmotion/julian-alvarez.mp4", poster: "assets/trabajos/stopmotion/julian-alvarez.jpg", w: 1280, h: 720, alt: "Stop motion sobre cuadros de un partido de la selección argentina con trama de imprenta, dibujados encima: La Araña escrito sobre la cancha, una telaraña, la corrida con la pelota, el arco, el festejo y la firma Atus Kmi" }
+      ]
+    },
+    puertas: {
+      kind: "stop motion",
+      title: "Puertas",
+      meta: [["de", "Atus y Kmi"], ["técnica", "stop motion"], ["lugar", "Barcelona"]],
+      text: [
+        "En un viaje a Barcelona nos llamaron la atención las puertas: cada una tiene su propia trama de grafitis, stickers y pintura, y no hay dos iguales.",
+        "Con Cami las fuimos fotografiando y con esas fotos armamos este stop motion: una puerta por cuadro, una atrás de la otra, hasta cerrar con nuestra firma."
+      ],
+      slides: [
+        { video: "assets/trabajos/stopmotion/puertas.mp4", poster: "assets/trabajos/stopmotion/puertas.jpg", w: 608, h: 1080, alt: "Stop motion con fotos de puertas de Barcelona cubiertas de grafitis y stickers, una por cuadro, que termina con la firma de Atus Kmi dentro de una puerta dibujada en blanco y negro" }
       ]
     }
   };
@@ -193,6 +210,7 @@
   var motion = root.classList.contains("motion");
   var lenis = null;
   var waUrl = function (text) { return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text); };
+  var VOLUMEN = 0.5; // volumen con el que arranca cada video del visor (0 a 1)
   function playQuiet(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
 
   /* sin viudas: une las dos últimas palabras con un espacio que no corta,
@@ -393,6 +411,8 @@
       else if (s.video) {
         var v = document.createElement("video");
         v.controls = true; v.playsInline = true; v.preload = "none";
+        v.volume = VOLUMEN; // arrancan siempre a la mitad: nadie se lleva un susto si tiene el volumen alto
+        if (s.loop) v.loop = true;
         if (s.w) { v.width = s.w; v.height = s.h; }
         if (s.poster) v.poster = s.poster;
         v.dataset.src = s.video;
@@ -422,7 +442,6 @@
       return f;
     });
     pvGroups.hidden = nG < 2;
-    pv.classList.toggle("has-groups", nG > 1);
     $("#pv-kind").textContent = p.kind;
     $("#pv-title").textContent = p.title;
     $("#pv-meta").innerHTML = p.meta.map(function (m) { return "<div><dt>" + m[0] + "</dt><dd>" + m[1] + "</dd></div>"; }).join("");

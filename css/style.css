@@ -350,7 +350,7 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .works__reset svg { flex: none; width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
 .works__reset:hover, .works__reset:focus-visible { background: var(--paper); }
 .works__reset:active { translate: 3px 3px; box-shadow: 2px 2px 0 var(--paper); }
-.board { position: relative; width: 100%; aspect-ratio: 1440 / 1051; margin-top: clamp(16px, 3vh, 40px); }
+.board { position: relative; width: 100%; aspect-ratio: 1440 / 1008; margin-top: clamp(16px, 3vh, 40px); }
 .piece {
   position: absolute;
   left: calc(var(--x) * 1%);
@@ -433,13 +433,6 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   box-shadow: 4px 4px 0 var(--ink); opacity: 0; pointer-events: none; transition: opacity 0.3s;
 }
 .pv.is-tall .pv__hint { opacity: 1; }
-/* las partes del proyecto: video, manual, redes… */
-.pv__groups { position: absolute; left: 16px; top: 16px; z-index: 3; display: flex; gap: 8px; max-width: calc(100% - 32px); overflow-x: auto; scrollbar-width: none; }
-.pv__groups::-webkit-scrollbar { display: none; }
-.pv__groups[hidden] { display: none; }
-.pv__group { flex: none; padding: 0.5em 0.85em 0.55em; border: 2px solid rgba(246, 246, 246, 0.8); background: rgba(25, 25, 25, 0.55); font-weight: 600; font-size: 0.92rem; line-height: 1; letter-spacing: -0.02em; transition: background-color 0.25s, border-color 0.25s, color 0.25s; }
-.pv__group:hover, .pv__group.on { background: var(--lime); border-color: var(--lime); color: var(--ink); }
-.pv.has-groups .pv__slide { top: max(68px, 5vw); }
 .pv__nav {
   position: absolute;
   top: 50%;
@@ -480,6 +473,11 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .pv__meta dd { margin: 0; }
 .pv__meta a { color: var(--lime); text-underline-offset: 0.2em; }
 .pv__text p { margin: 0 0 1em; font-size: 1.02rem; line-height: 1.7; color: var(--soft); }
+/* las partes del proyecto (video, reel, manual, redes…): van en el panel, justo abajo del texto */
+.pv__groups { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.7rem; }
+.pv__groups[hidden] { display: none; }
+.pv__group { padding: 0.6em 1em 0.66em; border: 2px solid rgba(246, 246, 246, 0.8); font-weight: 600; font-size: 1.02rem; line-height: 1; letter-spacing: -0.02em; transition: background-color 0.25s, border-color 0.25s, color 0.25s; }
+.pv__group:hover, .pv__group.on { background: var(--lime); border-color: var(--lime); color: var(--ink); }
 
 /* =========================================================================
    CONTACTO / FOOTER
@@ -522,7 +520,7 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 
   /* trabajos en mobile: la misma mesa de piezas sueltas, con otra distribución (--mx/--my/--mw/--mr).
      Se arrastran de costado con el dedo; deslizar para arriba o abajo sigue scrolleando */
-  .board { aspect-ratio: 390 / 1345; }
+  .board { aspect-ratio: 390 / 1154; }
   .piece { left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); width: calc(var(--mw) * 1vw); }
   .piece__tilt { rotate: calc(var(--mr) * 1deg); }
   .piece__tag { opacity: 1; }
@@ -530,10 +528,7 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 
   .pv { grid-template-columns: 1fr; grid-template-rows: 56svh auto; overflow-y: auto; }
   .pv__stage { position: sticky; top: 0; z-index: 1; }
-  .pv__slide, .pv.has-groups .pv__slide { inset: 64px 16px 46px; }
-  /* en el celu los botones de las partes van en una fila que se desliza de costado, al lado de "cerrar" */
-  .pv__groups { left: 12px; top: 14px; gap: 6px; max-width: calc(100% - 106px); padding-right: 22px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent); }
-  .pv__group { padding: 0.55em 0.68em 0.6em; font-size: 0.78rem; background: rgba(25, 25, 25, 0.7); }
+  .pv__slide { inset: 64px 16px 46px; }
   .pv__hint { bottom: 48px; }
   .pv__panel { overflow: visible; border-left: 0; border-top: 1px solid var(--line); padding: 26px var(--gutter) 40px; background: var(--ink); position: relative; z-index: 2; }
   .pv__x { position: fixed; top: 12px; right: 12px; z-index: 3; background: rgba(25, 25, 25, 0.7); }
