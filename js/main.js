@@ -150,6 +150,7 @@
       ],
       slides: [
         { video: "assets/trabajos/talloverde/talloverde-video.mp4", poster: "assets/trabajos/talloverde/talloverde-video-poster.jpg", w: 1920, h: 1080, g: "video", alt: "Video del caso Tallo Verde: la guía de marca, la web talloverde.com, los posteos e historias y los newsletters" },
+        { video: "assets/trabajos/talloverde/talloverde-web.mp4", poster: "assets/trabajos/talloverde/talloverde-web-poster.jpg", w: 1920, h: 1080, g: "web", loop: true, alt: "Recorrido por talloverde.com: el inicio, las categorías con sus ilustraciones, la página de frutas y el pie" },
         { video: "assets/trabajos/talloverde/talloverde-redes.mp4", poster: "assets/trabajos/talloverde/talloverde-redes-poster.jpg", w: 1280, h: 720, g: "redes", loop: true, alt: "Los posteos de Tallo Verde en un muro que se mueve: las placas del feed en cinco columnas" },
         { src: "assets/trabajos/talloverde/redes-grilla.webp", w: 1622, h: 2000, g: "redes", alt: "Nueve posteos de Tallo Verde en grilla de tres por tres" },
         { src: "assets/trabajos/talloverde/redes-historias.webp", w: 1920, h: 679, g: "redes", alt: "Cinco historias de Tallo Verde: armá tu semana, agarrá el que necesites, llegó la primavera, quiz rápido y dato curioso" },
