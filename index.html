@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
   <title>cactus® | agencia de diseño gráfico y multimedia</title>
-  <meta name="description" content="cactus® es una agencia de diseño gráfico y multimedia formada por Atus y Cami: branding, publicidad, packaging, editorial, merch, video, web, redes y fotografía.">
+  <meta name="description" content="cactus® es una agencia de diseño gráfico y multimedia formada por Atus y Cami: branding, publicidad, packaging, editorial, merch, video, web, redes, fotografía y fotobooks.">
   <meta name="theme-color" content="#191919">
   <meta property="og:title" content="cactus® | agencia de diseño gráfico y multimedia">
   <meta property="og:description" content="No te quedes afuera.">
@@ -15,7 +15,7 @@
   <!-- Poppins 400-700 van locales (assets/fonts); la Light y la Light Italic del manual vienen de Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap">
   <link rel="preload" href="assets/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=16">
+  <link rel="stylesheet" href="css/style.css?v=17">
   <script>
     (function () {
       var d = document.documentElement;
@@ -204,6 +204,12 @@
               <span class="srv__desc">Producto, retrato y campaña, para que tu marca tenga imágenes propias.</span>
               <span class="srv__check" aria-hidden="true"></span>
             </button></li>
+            <li class="rv"><button class="srv" type="button" aria-pressed="false" data-srv="Fotobooks">
+              <span class="srv__num">(05)</span>
+              <span class="srv__name"><span>Fotobooks</span></span>
+              <span class="srv__desc">Libros de fotos diseñados página por página: de un evento, un viaje o tu marca.</span>
+              <span class="srv__check" aria-hidden="true"></span>
+            </button></li>
           </ul>
 
           <!-- consulta general: queda quieta acá, abajo de la lista de multimedia -->
@@ -234,57 +240,97 @@
       </div>
 
       <div class="board" id="board">
-        <!-- el video de marca va primero: arriba al medio en la compu, primero en el celu.
-             En la mesa corre sin sonido; al tocarlo se abre con sonido -->
-        <figure class="piece piece--video" style="--x:37.5;--y:8;--w:25;--r:-1.5;--mx:19;--my:0.9;--mw:62;--mr:-1.5" data-float="50" data-project="video" data-slide="0">
+        <!-- el video de cactus va primero: arriba al medio en la compu, primero en el celu.
+             Los videos de la mesa corren sin sonido; al tocarlos se abre el proyecto con sonido.
+             piece--mr = pieza de la columna derecha en el celu (su etiqueta se alinea a la derecha para no salirse) -->
+        <figure class="piece piece--video" style="--x:37;--y:4.1;--w:26;--r:-1.5;--mx:18;--my:0.9;--mw:64;--mr:-1.5" data-float="50" data-project="cactus" data-slide="0">
           <div class="piece__float"><div class="piece__tilt">
             <div class="piece__frame">
-              <video muted loop playsinline preload="none" width="960" height="540" poster="assets/video/cactus-gancho.jpg" data-src="assets/video/cactus-gancho-540.mp4" aria-hidden="true"></video>
+              <video muted loop playsinline preload="none" width="540" height="304" poster="assets/trabajos/cactus/cactus-loop.jpg" data-src="assets/trabajos/cactus/cactus-loop.mp4" aria-hidden="true"></video>
               <span class="piece__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></svg></span>
             </div>
-            <figcaption class="piece__tag"><b>Video de marca</b> <span>motion</span></figcaption>
+            <figcaption class="piece__tag"><b>cactus®</b> <span>video de marca</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:5;--y:7;--w:17;--r:-3;--mx:5;--my:18.3;--mw:40;--mr:-4" data-float="80" data-project="udent" data-slide="0">
+        <figure class="piece" style="--x:4;--y:9.6;--w:20;--r:-3;--mx:4;--my:15.1;--mw:54;--mr:-3" data-float="80" data-project="udent" data-slide="0" data-flat>
           <div class="piece__float"><div class="piece__tilt">
-            <div class="piece__frame"><img src="assets/img/udent/tapa.svg" width="800" height="1000" alt="U.Dent, identidad para un estudio dental" draggable="false"></div>
-            <figcaption class="piece__tag"><b>U.Dent</b> <span>identidad · en proceso</span></figcaption>
+            <div class="piece__frame"><img src="assets/trabajos/udent/cover-tarjeta.webp" width="1000" height="525" alt="Tarjeta de U.Dent en crema: el logotipo, el isotipo de puntos y los datos escritos con un punto en el medio, como Estudio.Dental" draggable="false"></div>
+            <figcaption class="piece__tag"><b>U.Dent</b> <span>identidad</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:30;--y:40;--w:15;--r:4;--mx:55;--my:20.4;--mw:38;--mr:5" data-float="140" data-project="nosllaman" data-slide="0">
+        <figure class="piece piece--mr" style="--x:68.5;--y:3.4;--w:13;--r:3;--mx:60;--my:14.2;--mw:36;--mr:4" data-float="110" data-project="talloverde" data-slide="0" data-flat>
           <div class="piece__float"><div class="piece__tilt">
-            <div class="piece__frame"><img src="assets/img/afiche-blanco.webp" width="900" height="1126" alt="Afiche de cactus®: Nos llaman? ah sí" draggable="false" loading="lazy"></div>
-            <figcaption class="piece__tag"><b>Nos llaman?</b> <span>campaña</span></figcaption>
+            <div class="piece__frame"><img src="assets/trabajos/talloverde/tapa-nueva-web.webp" width="1000" height="1250" alt="Posteo de Tallo Verde: Nueva web, ¡nos renovamos!, con las ilustraciones de la tienda" draggable="false"></div>
+            <figcaption class="piece__tag"><b>Tallo Verde</b> <span>web y redes</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:50;--y:45;--w:14;--r:-2;--mx:10;--my:41.7;--mw:34;--mr:-3" data-float="60" data-project="identidad" data-slide="1">
+        <figure class="piece piece--video piece--mr" style="--x:85.5;--y:9.6;--w:11.5;--r:4;--mx:58;--my:31.3;--mw:34;--mr:4" data-float="140" data-project="topados" data-slide="0">
           <div class="piece__float"><div class="piece__tilt">
-            <div class="piece__frame"><img src="assets/img/cactus-papel-verde.webp" width="900" height="1126" alt="Logotipo de cactus® impreso sobre papel verde" draggable="false" loading="lazy"></div>
-            <figcaption class="piece__tag"><b>cactus®</b> <span>identidad</span></figcaption>
+            <div class="piece__frame">
+              <video muted loop playsinline preload="none" width="360" height="640" poster="assets/trabajos/topados/topados-loop.jpg" data-src="assets/trabajos/topados/topados-loop.mp4" aria-hidden="true"></video>
+              <span class="piece__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></svg></span>
+            </div>
+            <figcaption class="piece__tag"><b>Topados</b> <span>restyling</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:67;--y:13;--w:16;--r:3;--mx:52;--my:43.5;--mw:38;--mr:4" data-float="110" data-project="afiches" data-slide="1">
+        <figure class="piece piece--video" style="--x:7;--y:34.2;--w:16;--r:2;--mx:6;--my:26.7;--mw:44;--mr:2" data-float="70" data-project="julia" data-slide="0">
           <div class="piece__float"><div class="piece__tilt">
-            <div class="piece__frame"><img src="assets/img/poster-colores-negro.webp" width="900" height="1126" alt="Afiche negro con tipografía verde gigante" draggable="false" loading="lazy"></div>
-            <figcaption class="piece__tag"><b>Probando frases</b> <span>afiches</span></figcaption>
+            <div class="piece__frame">
+              <video muted loop playsinline preload="none" width="540" height="540" poster="assets/trabajos/julia/julia-loop-cuadrado-poster.jpg" data-src="assets/trabajos/julia/julia-loop-cuadrado.mp4" aria-hidden="true"></video>
+              <span class="piece__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></svg></span>
+            </div>
+            <figcaption class="piece__tag"><b>Julia Marro</b> <span>web y disco</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:5;--y:56;--w:23;--r:2;--mx:4;--my:64.8;--mw:54;--mr:2" data-float="90" data-project="identidad" data-slide="0">
+        <figure class="piece piece--video" style="--x:28;--y:35.6;--w:19;--r:-2.5;--mx:3;--my:43.5;--mw:52;--mr:-3" data-float="120" data-project="stopmotion" data-slide="0">
           <div class="piece__float"><div class="piece__tilt">
-            <div class="piece__frame"><img src="assets/img/logo-papel-negro.webp" width="1440" height="810" alt="Logotipo de cactus® en blanco sobre papel negro" draggable="false" loading="lazy"></div>
-            <figcaption class="piece__tag"><b>cactus®</b> <span>logotipo</span></figcaption>
+            <div class="piece__frame">
+              <video muted loop playsinline preload="none" width="480" height="270" poster="assets/trabajos/stopmotion/scott-pilgrim-loop.jpg" data-src="assets/trabajos/stopmotion/scott-pilgrim-loop.mp4" aria-hidden="true"></video>
+              <span class="piece__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></svg></span>
+            </div>
+            <figcaption class="piece__tag"><b>Scott Pilgrim</b> <span>stop motion</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:85;--y:5;--w:12;--r:5;--mx:66;--my:66.1;--mw:28;--mr:6" data-float="150" data-project="identidad" data-slide="2">
+        <figure class="piece" style="--x:52;--y:37;--w:19;--r:2;--mx:4;--my:69.6;--mw:54;--mr:-2" data-float="60" data-project="talloverde" data-slide="3">
           <div class="piece__float"><div class="piece__tilt">
-            <div class="piece__frame"><img src="assets/img/trama-verde.webp" width="900" height="900" alt="Trama de la A estrella sobre verde" draggable="false" loading="lazy"></div>
-            <figcaption class="piece__tag"><b>cactus®</b> <span>trama</span></figcaption>
+            <div class="piece__frame"><img src="assets/trabajos/talloverde/tapa-web.webp" width="1000" height="562" alt="Inicio de talloverde.com: De la huerta a tu casa" draggable="false" loading="lazy"></div>
+            <figcaption class="piece__tag"><b>Tallo Verde</b> <span>talloverde.com</span></figcaption>
           </div></div>
         </figure>
-        <figure class="piece" style="--x:72;--y:52;--w:14;--r:-4;--mx:30;--my:80;--mw:34;--mr:-5" data-float="70" data-project="nosllaman" data-slide="1">
+        <figure class="piece piece--mr" style="--x:76;--y:43.8;--w:16;--r:-3;--mx:50;--my:53.3;--mw:44;--mr:3" data-float="100" data-project="cactus" data-slide="2" data-flat>
           <div class="piece__float"><div class="piece__tilt">
-            <div class="piece__frame"><img src="assets/img/afiche-negro.webp" width="900" height="1126" alt="Versión negra del afiche Nos llaman?" draggable="false" loading="lazy"></div>
-            <figcaption class="piece__tag"><b>Nos llaman?</b> <span>versión negra</span></figcaption>
+            <div class="piece__frame"><img src="assets/trabajos/cactus/cover-manual.webp" width="1000" height="706" alt="Tapa del manual de marca de cactus®: el logotipo en negro sobre verde" draggable="false" loading="lazy"></div>
+            <figcaption class="piece__tag"><b>cactus®</b> <span>manual de marca</span></figcaption>
+          </div></div>
+        </figure>
+        <figure class="piece piece--video piece--mr" style="--x:5;--y:64.4;--w:11;--r:-4;--mx:62;--my:66.1;--mw:32;--mr:5" data-float="90" data-project="stopmotion" data-slide="2">
+          <div class="piece__float"><div class="piece__tilt">
+            <div class="piece__frame">
+              <video muted loop playsinline preload="none" width="304" height="540" poster="assets/trabajos/stopmotion/puertas-loop.jpg" data-src="assets/trabajos/stopmotion/puertas-loop.mp4" aria-hidden="true"></video>
+              <span class="piece__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></svg></span>
+            </div>
+            <figcaption class="piece__tag"><b>Puertas</b> <span>stop motion</span></figcaption>
+          </div></div>
+        </figure>
+        <figure class="piece piece--video" style="--x:21;--y:68.5;--w:19;--r:3;--mx:4;--my:84.1;--mw:44;--mr:-3" data-float="150" data-project="stopmotion" data-slide="1">
+          <div class="piece__float"><div class="piece__tilt">
+            <div class="piece__frame">
+              <video muted loop playsinline preload="none" width="480" height="270" poster="assets/trabajos/stopmotion/julian-alvarez-loop.jpg" data-src="assets/trabajos/stopmotion/julian-alvarez-loop.mp4" aria-hidden="true"></video>
+              <span class="piece__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></svg></span>
+            </div>
+            <figcaption class="piece__tag"><b>Julián Álvarez</b> <span>stop motion</span></figcaption>
+          </div></div>
+        </figure>
+        <figure class="piece" style="--x:46;--y:61.6;--w:12.5;--r:-3;--mx:8;--my:55.7;--mw:34;--mr:-4" data-float="70" data-project="udent" data-slide="2" data-flat>
+          <div class="piece__float"><div class="piece__tilt">
+            <div class="piece__frame"><img src="assets/trabajos/udent/cover-isotipo.webp" width="1000" height="1000" alt="Isotipo de U.Dent: una U dibujada con dieciséis puntos, en crema sobre aqua" draggable="false" loading="lazy"></div>
+            <figcaption class="piece__tag"><b>U.Dent</b> <span>manual de marca</span></figcaption>
+          </div></div>
+        </figure>
+        <figure class="piece piece--mr" style="--x:66;--y:67.1;--w:17;--r:2.5;--mx:50;--my:87;--mw:44;--mr:3" data-float="110" data-project="topados" data-slide="1" data-flat>
+          <div class="piece__float"><div class="piece__tilt">
+            <div class="piece__frame"><img src="assets/trabajos/topados/cover-manual.webp" width="1000" height="706" alt="Tapa del manual de marca de Topados: el imagotipo en crema sobre marrón" draggable="false" loading="lazy"></div>
+            <figcaption class="piece__tag"><b>Topados</b> <span>manual de marca</span></figcaption>
           </div></div>
         </figure>
       </div>
@@ -312,9 +358,12 @@
   </main>
 
   <!-- ============ PROYECTO ABIERTO: imágenes + panel de texto ============ -->
-  <div class="pv" id="pv" hidden role="dialog" aria-modal="true" aria-labelledby="pv-title">
+  <div class="pv" id="pv" hidden role="dialog" aria-modal="true" aria-labelledby="pv-title" data-lenis-prevent>
     <div class="pv__stage" id="pv-stage">
+      <!-- las partes del proyecto (video, manual, redes…): cada botón salta a su primera imagen -->
+      <div class="pv__groups" id="pv-groups" hidden></div>
       <div class="pv__slides" id="pv-slides"></div>
+      <span class="pv__hint" id="pv-hint" aria-hidden="true">bajá para verla entera ↓</span>
       <button class="pv__nav pv__prev" type="button" data-pv="-1" aria-label="Imagen anterior">←</button>
       <button class="pv__nav pv__next" type="button" data-pv="1" aria-label="Imagen siguiente">→</button>
       <span class="pv__count" id="pv-count"></span>
@@ -331,6 +380,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-  <script src="js/main.js?v=15"></script>
+  <script src="js/main.js?v=16"></script>
 </body>
 </html>

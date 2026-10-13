@@ -12,81 +12,173 @@
   };
 
   /* ---------- proyectos: lo que se abre al tocar un trabajo ----------
-     slides: { src, alt } para imágenes, { html, alt } para láminas armadas con HTML,
-     o { video, poster, w, h, alt } para videos (se reproducen con sonido al abrirse). */
+     slides: { src, w, h, alt } para imágenes o { video, poster, w, h, alt } para videos (se reproducen con sonido al abrirse).
+     g = la parte del proyecto (video, manual, redes…): arma los botones de arriba del visor.
+     tall: true = pieza larga que se recorre bajando (tw = ancho máximo en px). */
   var PROJECTS = {
-    video: {
-      kind: "motion · manual de marca",
-      title: "Video de marca",
-      meta: [["cliente", "cactus®"], ["servicios", "motion, edición, reels"], ["formatos", "horizontal y reel"], ["año", "2026"]],
+    cactus: {
+      kind: "identidad propia · manual y video",
+      title: "cactus®",
+      meta: [["cliente", "cactus®"], ["servicios", "logotipo, reducciones, trama, manual de marca, video"], ["año", "2026"]],
       text: [
-        "El manual de marca de cactus® contado en 30 segundos. Arranca con un teléfono que suena: es tu marca preguntando por nosotros.",
-        "Después repasa el logotipo, la grilla, el monograma, las tipografías, los colores y la trama, y termina en las aplicaciones."
+        "Nuestra propia marca. El logotipo combina letras en Poppins Bold con una A dibujada a mano en forma de estrella, y tiene dos reducciones para formatos chicos: el monograma CA y la A estrella.",
+        "Tres colores (verde, negro y blanco), la Aston Script para los remates y una trama con la A repetida en filas a 20°.",
+        "El video cuenta el manual en medio minuto. Arranca con un teléfono que suena: es tu marca preguntando por nosotros."
       ],
       slides: [
-        { video: "assets/video/cactus-video-1080.mp4", poster: "assets/video/cactus-gancho.jpg", w: 1920, h: 1080, alt: "Video de marca de cactus®, versión horizontal" },
-        { video: "assets/video/cactus-reel-720.mp4", poster: "assets/video/cactus-reel.jpg", w: 720, h: 1280, alt: "Video de marca de cactus®, versión reel" }
+        { video: "assets/trabajos/cactus/cactus-video.mp4", poster: "assets/trabajos/cactus/cactus-video.jpg", w: 1920, h: 1080, g: "video", alt: "Video de marca de cactus®, versión horizontal: suena un teléfono, aparece Nos llaman? ah sí, es tu marca preguntando por cactus, y sigue el manual de marca: logotipo, grilla, monograma, tipografías, colores, trama y aplicaciones" },
+        { video: "assets/trabajos/cactus/cactus-reel.mp4", poster: "assets/trabajos/cactus/cactus-reel.jpg", w: 1080, h: 1920, g: "reel", alt: "Video de marca de cactus®, versión reel vertical, con el mismo recorrido" },
+        { src: "assets/trabajos/cactus/manual-01.webp", w: 1800, h: 1272, g: "manual", alt: "Tapa del manual de marca de cactus®: el logotipo en negro sobre verde, edición 2026" },
+        { src: "assets/trabajos/cactus/manual-02.webp", w: 1800, h: 1272, g: "manual", alt: "Índice del manual: catorce secciones, de la marca a contacto" },
+        { src: "assets/trabajos/cactus/manual-03.webp", w: 1800, h: 1272, g: "manual", alt: "La marca: Nos llaman? ah sí, es tu marca preguntando por cactus, con el teléfono plegable y la lista de servicios" },
+        { src: "assets/trabajos/cactus/manual-04.webp", w: 1800, h: 1272, g: "manual", alt: "Logotipo de cactus® en negro sobre blanco: letras en Poppins Bold y una A dibujada a mano en forma de estrella" },
+        { src: "assets/trabajos/cactus/manual-05.webp", w: 1800, h: 1272, g: "manual", alt: "Grilla de construcción del logotipo: ascendente, altura x, eje, línea base y el módulo verde" },
+        { src: "assets/trabajos/cactus/manual-06.webp", w: 1800, h: 1272, g: "manual", alt: "Reducciones: el monograma CA y la A estrella" },
+        { src: "assets/trabajos/cactus/manual-07.webp", w: 1800, h: 1272, g: "manual", alt: "Área de resguardo de un módulo por lado y tamaños mínimos del logotipo y las reducciones" },
+        { src: "assets/trabajos/cactus/manual-08.webp", w: 1800, h: 1272, g: "manual", alt: "Versiones de color: cuatro combinaciones de negro, blanco y verde" },
+        { src: "assets/trabajos/cactus/manual-09.webp", w: 1800, h: 1272, g: "manual", alt: "Usos incorrectos del logotipo: no deformar, no rotar, no cambiar colores, no agregar efectos, no usar sin contraste, no separar las letras" },
+        { src: "assets/trabajos/cactus/manual-10.webp", w: 1800, h: 1272, g: "manual", alt: "Paleta de color: blanco #F6F6F6, negro #191919 y verde #7BE600" },
+        { src: "assets/trabajos/cactus/manual-11.webp", w: 1800, h: 1272, g: "manual", alt: "Tipografía principal: Poppins, con sus pesos Bold, Regular y Light Italic" },
+        { src: "assets/trabajos/cactus/manual-12.webp", w: 1800, h: 1272, g: "manual", alt: "Tipografía secundaria: Aston Script, en negro sobre verde" },
+        { src: "assets/trabajos/cactus/manual-13.webp", w: 1800, h: 1272, g: "manual", alt: "Combinación tipográfica: Poppins y Aston Script, juntas o por separado" },
+        { src: "assets/trabajos/cactus/manual-14.webp", w: 1800, h: 1272, g: "manual", alt: "Trama: la A estrella repetida en filas a 20 grados, en negro sobre verde y en verde sobre negro" },
+        { src: "assets/trabajos/cactus/manual-15.webp", w: 1800, h: 1272, g: "manual", alt: "Aplicaciones: dos afiches Nos llaman?, sobre blanco y sobre negro, con el teléfono verde" },
+        { src: "assets/trabajos/cactus/manual-16.webp", w: 1800, h: 1272, g: "manual", alt: "Aplicaciones: cuatro historias verticales para redes, dos de Nos llaman? y dos con los servicios" },
+        { src: "assets/trabajos/cactus/manual-17.webp", w: 1800, h: 1272, g: "manual", alt: "Contacto: el logotipo en blanco sobre negro, el mail estudio.c4ctus@gmail.com y no te quedes afuera" },
+        { src: "assets/img/logo-papel-negro.webp", w: 1440, h: 810, g: "piezas", alt: "Logotipo de cactus® en blanco sobre papel negro" },
+        { src: "assets/img/cactus-papel-verde.webp", w: 900, h: 1126, g: "piezas", alt: "Logotipo de cactus® impreso sobre papel verde" },
+        { src: "assets/img/trama-verde.webp", w: 900, h: 900, g: "piezas", alt: "Trama de la A estrella a 20 grados sobre verde" },
+        { src: "assets/img/afiche-blanco.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche Nos llaman? sobre blanco, con el teléfono verde" },
+        { src: "assets/img/afiche-negro.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche Nos llaman? sobre negro" },
+        { src: "assets/img/poster-frases-verde.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche verde: probando frases para testear distintas gráficas" },
+        { src: "assets/img/poster-colores-negro.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche negro: probando todos los colores juntos" },
+        { src: "assets/img/poster-frases-negro.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche negro: probando frases, versión negra" }
+      ]
+    },
+    julia: {
+      kind: "web · arte de disco",
+      title: "Julia Marro",
+      meta: [["cliente", "Julia Marro"], ["servicios", "diseño web, arte de disco"], ["sitio", "<a href=\"https://juliamarro.com\" target=\"_blank\" rel=\"noopener\">juliamarro.com</a>"], ["año", "2026"]],
+      text: [
+        "Para Julia Marro, productora y artista de Buenos Aires, hicimos juliamarro.com: su portfolio y su disco en una sola página. Fondo negro, las fotos ponen el color y hay un solo reproductor para todo el sitio.",
+        "El bloque del disco es la tapa de Boston a BSAS hecha sitio: los autos pasan por atrás del cartel y prenden el grafiti, y al pasar el mouse por la foto el collage se destapa a color.",
+        "También hicimos el arte: la tapa es un cartel porteño con el collage adentro y la contratapa lleva los temas escritos a mano. Esa misma letra titula cada tema en la web: un clic y suena, con su onda y sus créditos."
+      ],
+      slides: [
+        { video: "assets/trabajos/julia/julia-web-y-disco.mp4", poster: "assets/trabajos/julia/julia-web-y-disco-poster.jpg", w: 1440, h: 810, g: "video", alt: "Video: recorrido por juliamarro.com y el arte del disco Boston a BSAS, con carteles que cuentan cómo se hizo" },
+        { src: "assets/trabajos/julia/web-inicio.webp", w: 1920, h: 1080, g: "web", alt: "Inicio de juliamarro.com: Julia Marro tocando el bajo en blanco y negro, con su nombre en grande" },
+        { src: "assets/trabajos/julia/web-cartel.webp", w: 1920, h: 1080, g: "web", alt: "El bloque del disco en el sitio: un Fitito pasa por atrás del cartel y el grafiti Boston a BSAS se prende en verde" },
+        { src: "assets/trabajos/julia/web-lupa.webp", w: 1920, h: 1080, g: "web", alt: "El mouse sobre la foto del cartel destapa el collage a color adentro de un círculo" },
+        { src: "assets/trabajos/julia/web-temas.webp", w: 1920, h: 1080, g: "web", alt: "La lista de temas con los títulos escritos a mano; Dance abierto, con su onda y sus créditos" },
+        { src: "assets/trabajos/julia/web-movil.webp", w: 2000, h: 1402, g: "web", alt: "El sitio en el celular: el inicio, el cartel del disco y la lista completa de temas" },
+        { src: "assets/trabajos/julia/disco-tapa.webp", w: 2000, h: 2000, g: "disco", alt: "Tapa de Boston a BSAS: un cartel verde de Buenos Aires con un collage en blanco y negro adentro y el título en grafiti" },
+        { src: "assets/trabajos/julia/disco-collage.webp", w: 2000, h: 2000, g: "disco", alt: "El collage a color: gente, carteles, un kiosco de diarios y una bandera argentina bajo un arco, con edificios de Boston al fondo" },
+        { src: "assets/trabajos/julia/disco-contratapa.webp", w: 2000, h: 2000, g: "disco", alt: "Contratapa: los nueve temas escritos a mano sobre una vista de Buenos Aires" },
+        { src: "assets/trabajos/julia/disco-cd.webp", w: 1724, h: 1152, g: "disco", alt: "El CD: la caja cerrada con la tapa y la caja abierta con la contratapa y el disco" }
+      ]
+    },
+    topados: {
+      kind: "restyling de marca",
+      title: "Topados",
+      meta: [["marca", "Topados, alfajores"], ["servicios", "restyling, manual de marca, reel"], ["año", "2026"]],
+      text: [
+        "Restyling de marca para Topados, alfajores. El imagotipo nuevo lleva un escudo con una T y se usa completo, solo el logotipo o solo el isotipo.",
+        "El manual define Georgia y Public Sans como tipografías, dos tramas y una combinación de colores para cada variedad: son seis, del dulce de leche con chocolate negro al Chocolate Intenso Black.",
+        "El reel muestra el logotipo que cambia de letra hasta llegar al nuevo, la paleta, la trama y el packaging."
+      ],
+      slides: [
+        { video: "assets/trabajos/topados/topados-reel.mp4", poster: "assets/trabajos/topados/topados-reel.jpg", w: 1080, h: 1920, g: "reel", alt: "Reel del restyling de marca de Topados: el logotipo cambia de tipografía hasta llegar al nuevo, aparece el escudo, la paleta por variedad, la trama y los alfajores con su packaging" },
+        { src: "assets/trabajos/topados/manual-01.webp", w: 1800, h: 1272, g: "manual", alt: "Tapa del manual de marca de Topados: el imagotipo en crema sobre marrón" },
+        { src: "assets/trabajos/topados/manual-02.webp", w: 1800, h: 1272, g: "manual", alt: "Trama de Topados a página completa, en marrón sobre crema" },
+        { src: "assets/trabajos/topados/manual-03.webp", w: 1800, h: 1272, g: "manual", alt: "Índice del manual: signo marcario, tipografía, paleta cromática, elementos gráficos y aplicación de marca" },
+        { src: "assets/trabajos/topados/manual-04.webp", w: 1800, h: 1272, g: "manual", alt: "Carátula de sección: Signo marcario" },
+        { src: "assets/trabajos/topados/manual-05.webp", w: 1800, h: 1272, g: "manual", alt: "Imagotipo de Topados: un escudo con una T sostenido por dos armadillos, con corona y una planta arriba, sobre el logotipo" },
+        { src: "assets/trabajos/topados/manual-06.webp", w: 1800, h: 1272, g: "manual", alt: "Área de reserva del imagotipo, marcada con el motivo de la trama" },
+        { src: "assets/trabajos/topados/manual-07.webp", w: 1800, h: 1272, g: "manual", alt: "Variables de uso: imagotipo, logotipo e isotipo en crema sobre marrón" },
+        { src: "assets/trabajos/topados/manual-08.webp", w: 1800, h: 1272, g: "manual", alt: "Versiones en positivo y en negativo del imagotipo" },
+        { src: "assets/trabajos/topados/manual-09.webp", w: 1800, h: 1272, g: "manual", alt: "Usos incorrectos: no deformar, no torcer, no combinar los colores, no utilizar efectos" },
+        { src: "assets/trabajos/topados/manual-10.webp", w: 1800, h: 1272, g: "manual", alt: "Carátula de sección: Tipografía" },
+        { src: "assets/trabajos/topados/manual-11.webp", w: 1800, h: 1272, g: "manual", alt: "Fuente principal: Georgia" },
+        { src: "assets/trabajos/topados/manual-12.webp", w: 1800, h: 1272, g: "manual", alt: "Fuente secundaria: Public Sans" },
+        { src: "assets/trabajos/topados/manual-13.webp", w: 1800, h: 1272, g: "manual", alt: "Carátula de sección: Paleta cromática" },
+        { src: "assets/trabajos/topados/manual-14.webp", w: 1800, h: 1272, g: "manual", alt: "Paleta de colores: cuatro colores principales y nueve secundarios, con sus valores" },
+        { src: "assets/trabajos/topados/manual-15.webp", w: 1800, h: 1272, g: "manual", alt: "Combinaciones de colores: una para cada variedad de alfajor, de la 01 a la 06" },
+        { src: "assets/trabajos/topados/manual-16.webp", w: 1800, h: 1272, g: "manual", alt: "Aplicaciones de color: el imagotipo en las seis combinaciones" },
+        { src: "assets/trabajos/topados/manual-17.webp", w: 1800, h: 1272, g: "manual", alt: "Carátula de sección: Elementos gráficos" },
+        { src: "assets/trabajos/topados/manual-18.webp", w: 1800, h: 1272, g: "manual", alt: "Tramas: la principal en outline y la secundaria en relleno" },
+        { src: "assets/trabajos/topados/manual-19.webp", w: 1800, h: 1272, g: "manual", alt: "Carátula de sección: Aplicaciones de marca" },
+        { src: "assets/trabajos/topados/manual-20.webp", w: 1800, h: 1272, g: "manual", alt: "Aplicación en packaging, sabores clásicos: alfajor de dulce de leche y chocolate negro con papel plateado" },
+        { src: "assets/trabajos/topados/manual-21.webp", w: 1800, h: 1272, g: "manual", alt: "Aplicación en packaging, sabores clásicos: el mismo alfajor con papel dorado" },
+        { src: "assets/trabajos/topados/manual-22.webp", w: 1800, h: 1272, g: "manual", alt: "Aplicación en packaging, sabores premium: Chocolate Intenso Black, con la trama en la faja" }
       ]
     },
     udent: {
-      kind: "identidad de marca · en proceso",
+      kind: "naming · identidad de marca",
       title: "U.Dent",
-      meta: [["cliente", "estudio dental"], ["servicios", "naming, logotipo, isotipo, papelería"], ["año", "2026"]],
+      meta: [["cliente", "estudio dental"], ["servicios", "naming, logotipo, isotipo, tramas, papelería, manual de marca, video"], ["año", "2026"]],
       text: [
-        "Naming e identidad para un estudio dental. La U del logotipo está dibujada con dieciséis puntos: las dieciséis piezas de la arcada superior, con los molares atrás y los incisivos adelante.",
-        "El sistema combina un peso liviano y uno pesado separados por un punto, como en Estudio.Dental o Turnos.En el día. Negro y blanco, con un único acento verde bosque."
+        "Naming e identidad para un estudio dental. El nombre nace de Ulfe.Dentista, el apellido y el oficio unidos por un punto, y se acorta a U.Dent.",
+        "Ese punto ata toda la marca: dibuja el isotipo, una U de dieciséis puntos; une lo liviano con lo pesado en cada línea de texto, Poppins antes y Helvetica después, como en Estudio.Dental; y arma las tramas. Todo en crema, marrón y aqua."
       ],
       slides: [
-        { src: "assets/img/udent/01.svg", alt: "Logotipo de U.Dent con el isotipo de puntos, claro sobre negro" },
-        { src: "assets/img/udent/02.svg", alt: "Logotipo de U.Dent sobre blanco, con el punto en verde bosque" },
-        { src: "assets/img/udent/03.svg", alt: "Isotipo de U.Dent: la U de dieciséis puntos sobre verde bosque" },
-        { alt: "Sistema liviano.pesado de U.Dent", html:
-          '<div class="sys">' +
-          '<p><span class="l">Estudio</span><span class="d">.</span><span class="b">Dental</span></p>' +
-          '<p><span class="l">Turnos</span><span class="d">.</span><span class="b">En el día</span></p>' +
-          '<p><span class="l">Carillas</span><span class="d">.</span><span class="b">En 7 días</span></p>' +
-          '<p><span class="l">Longevidad</span><span class="d">.</span><span class="b">Oral</span></p>' +
-          '</div>' }
+        { video: "assets/trabajos/udent/udent-video.mp4", poster: "assets/trabajos/udent/udent-video-poster.jpg", w: 1920, h: 1080, g: "video", alt: "Video de marca de U.Dent en 15 segundos: el punto de Ulfe.Dentista queda quieto mientras el nombre se acorta a U.Dent, se multiplica en la U de puntos, ata Juan.Ulfe, Estudio.Dental y poppins.helvetica, se vuelve los tres colores, las tramas y las tarjetas" },
+        { video: "assets/trabajos/udent/udent-reel.mp4", poster: "assets/trabajos/udent/udent-reel-poster.jpg", w: 1080, h: 1920, g: "reel", alt: "El mismo video de marca de U.Dent en formato vertical para reel" },
+        { src: "assets/trabajos/udent/manual-01.webp", w: 2000, h: 1413, g: "manual", alt: "Tapa del manual de marca de U.Dent: logotipo en marrón e isotipo de puntos en aqua sobre crema" },
+        { src: "assets/trabajos/udent/manual-02.webp", w: 2000, h: 1413, g: "manual", alt: "Índice del manual de U.Dent, con cada sección escrita liviano.pesado" },
+        { src: "assets/trabajos/udent/manual-03.webp", w: 2000, h: 1413, g: "manual", alt: "El nombre: Ulfe.Dentista, apellido y oficio unidos por un punto, se acorta a U.Dent" },
+        { src: "assets/trabajos/udent/manual-04.webp", w: 2000, h: 1413, g: "manual", alt: "Logotipo de U.Dent a página entera: la U en Poppins ExtraLight, el punto y Dent en Helvetica Regular" },
+        { src: "assets/trabajos/udent/manual-05.webp", w: 2000, h: 1413, g: "manual", alt: "Isotipo de U.Dent: una U dibujada con dieciséis puntos de tres tamaños, en crema sobre aqua" },
+        { src: "assets/trabajos/udent/manual-06.webp", w: 2000, h: 1413, g: "manual", alt: "El punto de U.Dent en grande y los cuatro lugares donde aparece: el nombre, el isotipo, cada línea de texto y las tramas" },
+        { src: "assets/trabajos/udent/manual-07.webp", w: 2000, h: 1413, g: "manual", alt: "El sistema liviano.pesado con las líneas de la marca: Ulfe.Dentista, Juan.Ulfe, Estudio.Dental, Uruguay.al 1011" },
+        { src: "assets/trabajos/udent/manual-08.webp", w: 2000, h: 1413, g: "manual", alt: "Tipografías de U.Dent: Poppins ExtraLight y Helvetica Regular, con la línea poppins.helvetica" },
+        { src: "assets/trabajos/udent/manual-09.webp", w: 2000, h: 1413, g: "manual", alt: "Colores de U.Dent: crema ECEBE2, marrón 352717 y aqua 73998F, y los tres cuadrados encajados" },
+        { src: "assets/trabajos/udent/manual-10.webp", w: 2000, h: 1413, g: "manual", alt: "Logotipo e isotipo de U.Dent sobre papel crema, aqua y marrón" },
+        { src: "assets/trabajos/udent/manual-11.webp", w: 2000, h: 1413, g: "manual", alt: "Las seis tramas de U.Dent, hechas con filas de puntos y con la U de puntos repetida" },
+        { src: "assets/trabajos/udent/manual-12.webp", w: 2000, h: 1413, g: "manual", alt: "Tarjeta de U.Dent en papel crema, con datos de ejemplo" },
+        { src: "assets/trabajos/udent/manual-13.webp", w: 2000, h: 1413, g: "manual", alt: "Tarjetas de U.Dent en aqua y en marrón, con datos de ejemplo" },
+        { src: "assets/trabajos/udent/manual-14.webp", w: 2000, h: 1413, g: "manual", alt: "Propuesta de área de resguardo y tamaños mínimos del logotipo y el isotipo de U.Dent" },
+        { src: "assets/trabajos/udent/manual-15.webp", w: 2000, h: 1413, g: "manual", alt: "Propuesta de usos incorrectos del logotipo de U.Dent" },
+        { src: "assets/trabajos/udent/manual-16.webp", w: 2000, h: 1413, g: "manual", alt: "Trama de U.Dent a página entera: la U de puntos en crema y aqua sobre marrón" }
       ]
     },
-    identidad: {
-      kind: "identidad propia",
-      title: "cactus®",
-      meta: [["cliente", "cactus®"], ["servicios", "logotipo, reducciones, trama, manual de marca"], ["año", "2026"]],
+    talloverde: {
+      kind: "web · redes · newsletter",
+      title: "Tallo Verde",
+      meta: [["cliente", "Tallo Verde"], ["servicios", "diseño web, redes, newsletters"], ["sitio", "<a href=\"https://talloverde.com\" target=\"_blank\" rel=\"noopener\">talloverde.com</a>"], ["año", "2026"]],
       text: [
-        "Nuestra propia marca: un logotipo en Poppins Bold con una A dibujada a mano en forma de estrella, dos reducciones para formatos chicos y una trama a 20° para fondos.",
-        "Tres colores (verde, negro y blanco) y la Aston Script para los remates."
+        "La web, las redes y los newsletters de Tallo Verde, una huerta orgánica que vende por internet. Todo sale de una misma guía: dos colores (crema y verde), títulos en Poppins Bold con Georgia Bold Italic y una ilustración para cada categoría de la tienda.",
+        "En talloverde.com esas ilustraciones ordenan la compra: promociones, frutas, hortalizas, almacén, granja, aromáticas y mermeladas. Después vuelven en los posteos, en las historias y en los newsletters que anunciaron la web nueva."
       ],
       slides: [
-        { src: "assets/img/logo-papel-negro.webp", alt: "Logotipo de cactus® en blanco sobre papel negro" },
-        { src: "assets/img/cactus-papel-verde.webp", alt: "Logotipo de cactus® impreso sobre papel verde" },
-        { src: "assets/img/trama-verde.webp", alt: "Trama de la A estrella a 20 grados sobre verde" }
+        { video: "assets/trabajos/talloverde/talloverde-video.mp4", poster: "assets/trabajos/talloverde/talloverde-video-poster.jpg", w: 1920, h: 1080, g: "video", alt: "Video del caso Tallo Verde: la guía de marca, la web talloverde.com, los posteos e historias y los newsletters" },
+        { src: "assets/trabajos/talloverde/guia-figma.webp", w: 1746, h: 2000, g: "guía", alt: "Guía de Tallo Verde: los dos colores, el logo, las tipografías, la aplicación en la web y el estilo de ilustración" },
+        { src: "assets/trabajos/talloverde/guia-ilustraciones.webp", w: 1920, h: 1080, g: "guía", alt: "Las siete ilustraciones de Tallo Verde: la caja de frutas y verduras, manzanas, acelga, miel, huevos, ají molido y mermelada" },
+        { src: "assets/trabajos/talloverde/web-inicio.webp", w: 1600, h: 2354, g: "web", tall: true, tw: 1000, alt: "Inicio de talloverde.com: portada «De la huerta a tu casa», las categorías ilustradas y el pie" },
+        { src: "assets/trabajos/talloverde/web-frutas.webp", w: 1600, h: 2600, g: "web", tall: true, tw: 1000, alt: "Página de la categoría frutas en talloverde.com, con los productos y sus precios" },
+        { src: "assets/trabajos/talloverde/web-celular.webp", w: 1420, h: 1978, g: "web", alt: "talloverde.com en el celular: el inicio completo y la categoría frutas con tres filas de productos" },
+        { src: "assets/trabajos/talloverde/redes-grilla.webp", w: 1622, h: 2000, g: "redes", alt: "Nueve posteos de Tallo Verde en grilla de tres por tres" },
+        { src: "assets/trabajos/talloverde/redes-historias.webp", w: 1920, h: 679, g: "redes", alt: "Cinco historias de Tallo Verde: armá tu semana, agarrá el que necesites, llegó la primavera, quiz rápido y dato curioso" },
+        { src: "assets/trabajos/talloverde/redes-nueva-web.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «Nueva web, ¡nos renovamos!» con las ilustraciones de los productos saliendo de una ventana de navegador" },
+        { src: "assets/trabajos/talloverde/redes-hay-brocoli.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «Hay brócoli»: un papel con la silueta de un brócoli recortada sobre una foto de brócolis" },
+        { src: "assets/trabajos/talloverde/redes-frutos-secos.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo sobre frutos secos: un anillo de frutos secos con el dato «20%» en el centro" },
+        { src: "assets/trabajos/talloverde/redes-ticket.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «conseguilos en Tallo Verde»: un ticket de compra apoyado sobre una canasta de frutas y verduras" },
+        { src: "assets/trabajos/talloverde/newsletter-los-tres.webp", w: 1820, h: 1941, g: "newsletter", alt: "Los tres newsletters de Tallo Verde uno al lado del otro: el general y los dos de lanzamiento de la web" },
+        { src: "assets/trabajos/talloverde/newsletter-lanzamiento.webp", w: 1212, h: 4131, g: "newsletter", tall: true, tw: 640, alt: "Newsletter de lanzamiento de la web: «Comprar online es así de simple», los tres pasos, las ofertas y el catálogo" }
       ]
     },
-    nosllaman: {
-      kind: "campaña",
-      title: "Nos llaman?",
-      meta: [["cliente", "cactus®"], ["servicios", "afiches, redes, video"], ["año", "2026"]],
+    stopmotion: {
+      kind: "animación",
+      title: "Stop motion",
+      meta: [["de", "Atus y Kmi"], ["piezas", "Scott Pilgrim, Julián Álvarez, Puertas"]],
       text: [
-        "La campaña de lanzamiento de cactus®: un teléfono que suena y es tu marca preguntando por nosotros.",
-        "Afiches en dos versiones, historias para redes y un video de marca."
+        "Tres piezas de stop motion de Atus y Kmi.",
+        "En Scott Pilgrim y en Julián Álvarez cada cuadro tiene dibujo y texto encima de la imagen: palabras que aparecen de a una, una telaraña sobre la cancha, un corazón entre el público.",
+        "Puertas recorre puertas pintadas de Barcelona, una por cuadro, y cierra con la firma de los dos."
       ],
       slides: [
-        { src: "assets/img/afiche-blanco.webp", alt: "Afiche Nos llaman? sobre blanco, con el teléfono verde" },
-        { src: "assets/img/afiche-negro.webp", alt: "Afiche Nos llaman? sobre negro" }
-      ]
-    },
-    afiches: {
-      kind: "afiches tipográficos",
-      title: "Probando frases",
-      meta: [["cliente", "cactus®"], ["servicios", "tipografía, afiches"], ["año", "2026"]],
-      text: [
-        "Pruebas de cómo conviven la Poppins y la Aston Script en las piezas de la marca: juntas, por separado y con todos los colores."
-      ],
-      slides: [
-        { src: "assets/img/poster-frases-verde.webp", alt: "Afiche verde: probando frases para testear distintas gráficas" },
-        { src: "assets/img/poster-colores-negro.webp", alt: "Afiche negro: probando todos los colores juntos" },
-        { src: "assets/img/poster-frases-negro.webp", alt: "Afiche negro: probando frases, versión negra" }
+        { video: "assets/trabajos/stopmotion/scott-pilgrim.mp4", poster: "assets/trabajos/stopmotion/scott-pilgrim.jpg", w: 1920, h: 1080, g: "scott pilgrim", alt: "Stop motion sobre cuadros de Scott Pilgrim con trama de imprenta, dibujados y escritos encima: la banda en el escenario, Scott y Ramona entre el público, palabras como that guy on bass, oh yeah y hello again friend of a friend, y la firma de Atus Kmi al final" },
+        { video: "assets/trabajos/stopmotion/julian-alvarez.mp4", poster: "assets/trabajos/stopmotion/julian-alvarez.jpg", w: 1280, h: 720, g: "julián álvarez", alt: "Stop motion sobre cuadros de un partido de la selección argentina con trama de imprenta, dibujados encima: La Araña escrito sobre la cancha, una telaraña, la corrida con la pelota, el arco, el festejo y la firma Atus Kmi" },
+        { video: "assets/trabajos/stopmotion/puertas.mp4", poster: "assets/trabajos/stopmotion/puertas.jpg", w: 608, h: 1080, g: "puertas", alt: "Stop motion con fotos de puertas de Barcelona cubiertas de grafitis y stickers, una por cuadro, que termina con la firma de Atus Kmi dentro de una puerta dibujada en blanco y negro" }
       ]
     }
   };
@@ -259,43 +351,78 @@
   });
 
   /* ---------- proyecto abierto: imágenes + panel de texto ---------- */
-  var pv = $("#pv"), pvSlides = $("#pv-slides"), pvCount = $("#pv-count"), pvAt = 0, pvList = [], pvLast = null;
+  var pv = $("#pv"), pvSlides = $("#pv-slides"), pvCount = $("#pv-count"), pvGroups = $("#pv-groups"), pvAt = 0, pvList = [], pvLast = null;
+  // las imágenes y los videos se bajan recién cuando les toca (la que se ve y las dos de al lado)
+  function pvLoad(k) {
+    var m = $("[data-src]", pvList[(k + pvList.length) % pvList.length]);
+    if (m) { m.src = m.dataset.src; m.removeAttribute("data-src"); }
+  }
   function pvGo(i) {
     if (!pvList.length) return;
     pvAt = (i + pvList.length) % pvList.length;
+    pvLoad(pvAt); pvLoad(pvAt + 1); pvLoad(pvAt - 1);
     pvList.forEach(function (s, k) {
       s.classList.toggle("on", k === pvAt);
       // los videos: el que queda a la vista arranca, los demás se pausan
       var v = $("video", s);
       if (v) { if (k === pvAt) playLoud(v); else if (!v.paused) v.pause(); }
     });
-    pvCount.textContent = pad(pvAt + 1) + " / " + pad(pvList.length);
+    var cur = pvList[pvAt];
+    pvCount.textContent = pad(pvAt + 1) + " / " + pad(pvList.length) + (cur._g ? " · " + cur._g : "");
     var single = pvList.length < 2;
     $$(".pv__nav").forEach(function (b) { b.hidden = single; });
     pvCount.hidden = single;
+    // la parte del proyecto en la que estás queda marcada
+    $$(".pv__group", pvGroups).forEach(function (b) { b.classList.toggle("on", b.textContent === cur._g); });
+    // las piezas largas (una web entera, un newsletter) se recorren bajando adentro del visor
+    cur.scrollTop = 0;
+    pv.classList.toggle("is-tall", cur.classList.contains("pv__slide--tall"));
   }
   function pvOpenProject(id, slide) {
     var p = PROJECTS[id];
     if (!p) return;
     pvLast = document.activeElement;
     pvSlides.innerHTML = "";
-    pvList = p.slides.map(function (s) {
+    pvGroups.innerHTML = "";
+    var lastG = null, nG = 0;
+    pvList = p.slides.map(function (s, k) {
       var f = document.createElement("figure");
-      f.className = "pv__slide";
+      f.className = "pv__slide" + (s.tall ? " pv__slide--tall" : "");
+      f._g = s.g || "";
       if (s.html) { f.innerHTML = s.html; f.setAttribute("role", "img"); f.setAttribute("aria-label", s.alt || ""); }
       else if (s.video) {
         var v = document.createElement("video");
-        v.controls = true; v.playsInline = true; v.preload = "metadata";
+        v.controls = true; v.playsInline = true; v.preload = "none";
         if (s.w) { v.width = s.w; v.height = s.h; }
         if (s.poster) v.poster = s.poster;
-        v.src = s.video;
+        v.dataset.src = s.video;
         v.setAttribute("aria-label", s.alt || "");
         f.appendChild(v);
       }
-      else { var img = document.createElement("img"); img.src = s.src; img.alt = s.alt || ""; img.draggable = false; f.appendChild(img); }
+      else {
+        var img = document.createElement("img");
+        if (s.w) { img.width = s.w; img.height = s.h; }
+        img.dataset.src = s.src; img.alt = s.alt || ""; img.draggable = false;
+        if (s.tall) {
+          img.style.maxWidth = (s.tw || 760) + "px";
+          f.addEventListener("scroll", function () { if (f.scrollTop > 8) pv.classList.remove("is-tall"); }, { passive: true });
+        }
+        f.appendChild(img);
+      }
+      // un botón por cada parte (video, manual, redes…), que salta a su primera imagen
+      if (s.g && s.g !== lastG) {
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "pv__group"; b.textContent = s.g;
+        b.addEventListener("click", function () { pvGo(k); });
+        pvGroups.appendChild(b);
+        nG++;
+      }
+      lastG = s.g || null;
       pvSlides.appendChild(f);
       return f;
     });
+    pvGroups.hidden = nG < 2;
+    pv.classList.toggle("has-groups", nG > 1);
     $("#pv-kind").textContent = p.kind;
     $("#pv-title").textContent = p.title;
     $("#pv-meta").innerHTML = p.meta.map(function (m) { return "<div><dt>" + m[0] + "</dt><dd>" + m[1] + "</dd></div>"; }).join("");
@@ -315,7 +442,7 @@
   }
   function pvClose() {
     if (!pvOpen) return;
-    pvOpen = false; pv.hidden = true;
+    pvOpen = false; pv.hidden = true; pv.classList.remove("is-tall");
     $$("video", pvSlides).forEach(function (v) { v.pause(); });
     if (motion) $$(".piece video").forEach(function (v) { if (v._inView && v.getAttribute("src")) playQuiet(v); });
     document.body.classList.remove("no-scroll");
@@ -431,6 +558,7 @@
       var fl = $(".piece__float", p), img = $(".piece__frame img, .piece__frame video", p);
       var px = (parseFloat(p.dataset.float) || 60) * (small ? 0.35 : 1);
       gsap.fromTo(fl, { y: px }, { y: -px, ease: "none", scrollTrigger: { trigger: board, start: "top bottom", end: "bottom top", scrub: true } });
+      if (p.hasAttribute("data-flat")) return; // piezas que no se pueden recortar (una tarjeta, una página): la imagen queda quieta en su marco
       gsap.set(img, { scale: 1.07 });
       gsap.fromTo(img, { yPercent: -3 }, { yPercent: 3, ease: "none", scrollTrigger: { trigger: p, start: "top bottom", end: "bottom top", scrub: true } });
     });

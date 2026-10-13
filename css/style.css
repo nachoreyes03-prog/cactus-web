@@ -350,7 +350,7 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .works__reset svg { flex: none; width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
 .works__reset:hover, .works__reset:focus-visible { background: var(--paper); }
 .works__reset:active { translate: 3px 3px; box-shadow: 2px 2px 0 var(--paper); }
-.board { position: relative; width: 100%; aspect-ratio: 1440 / 1000; margin-top: clamp(16px, 3vh, 40px); }
+.board { position: relative; width: 100%; aspect-ratio: 1440 / 1051; margin-top: clamp(16px, 3vh, 40px); }
 .piece {
   position: absolute;
   left: calc(var(--x) * 1%);
@@ -408,6 +408,8 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 }
 .pv__stage { position: relative; overflow: hidden; background: #111; }
 .pv__slides { position: absolute; inset: 0; }
+/* mientras baja una imagen se lee "cargando…" en el medio; la imagen lo tapa apenas aparece */
+.pv__slides::before { content: "cargando…"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 0.95rem; color: var(--mute); }
 .pv__slide {
   position: absolute;
   inset: clamp(24px, 5vw, 80px) clamp(70px, 6vw, 96px);
@@ -422,12 +424,22 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .pv__slide.on { opacity: 1; visibility: visible; transition: opacity 0.55s var(--ease); }
 .pv__slide img, .pv__slide video { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; outline: 1px solid rgba(246, 246, 246, 0.1); box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9); }
 .pv__slide video { display: block; background: #000; }
-/* imágenes armadas con HTML (por ejemplo, el sistema tipográfico de U.Dent) */
-.sys { width: min(100%, 1000px); aspect-ratio: 16 / 10; display: flex; flex-direction: column; justify-content: center; gap: 0.32em; padding: 7%; background: #fff; color: #111110; font-size: clamp(1.3rem, 3.1vw, 3.6rem); line-height: 1.05; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9); }
-.sys p { margin: 0; letter-spacing: -0.02em; }
-.sys .l { font-weight: 300; }
-.sys .d { color: #1E3B33; font-weight: 300; }
-.sys .b { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.035em; }
+/* piezas largas (una web entera, un newsletter): van a lo ancho y se recorren bajando adentro del visor */
+.pv__slide--tall { display: block; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(246, 246, 246, 0.35) transparent; }
+.pv__slide--tall img { display: block; width: 100%; max-height: none; margin: 0 auto; box-shadow: none; }
+.pv__hint {
+  position: absolute; left: 50%; bottom: 52px; z-index: 2; translate: -50% 0; padding: 0.5em 0.85em 0.55em;
+  background: var(--lime); color: var(--ink); font-weight: 700; font-size: 0.92rem; line-height: 1; letter-spacing: -0.03em; white-space: nowrap;
+  box-shadow: 4px 4px 0 var(--ink); opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.pv.is-tall .pv__hint { opacity: 1; }
+/* las partes del proyecto: video, manual, redes… */
+.pv__groups { position: absolute; left: 16px; top: 16px; z-index: 3; display: flex; gap: 8px; max-width: calc(100% - 32px); overflow-x: auto; scrollbar-width: none; }
+.pv__groups::-webkit-scrollbar { display: none; }
+.pv__groups[hidden] { display: none; }
+.pv__group { flex: none; padding: 0.5em 0.85em 0.55em; border: 2px solid rgba(246, 246, 246, 0.8); background: rgba(25, 25, 25, 0.55); font-weight: 600; font-size: 0.92rem; line-height: 1; letter-spacing: -0.02em; transition: background-color 0.25s, border-color 0.25s, color 0.25s; }
+.pv__group:hover, .pv__group.on { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+.pv.has-groups .pv__slide { top: max(68px, 5vw); }
 .pv__nav {
   position: absolute;
   top: 50%;
@@ -466,6 +478,7 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .pv__meta div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; line-height: 1.45; }
 .pv__meta dt { color: var(--mute); }
 .pv__meta dd { margin: 0; }
+.pv__meta a { color: var(--lime); text-underline-offset: 0.2em; }
 .pv__text p { margin: 0 0 1em; font-size: 1.02rem; line-height: 1.7; color: var(--soft); }
 
 /* =========================================================================
@@ -509,14 +522,19 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 
   /* trabajos en mobile: la misma mesa de piezas sueltas, con otra distribución (--mx/--my/--mw/--mr).
      Se arrastran de costado con el dedo; deslizar para arriba o abajo sigue scrolleando */
-  .board { aspect-ratio: 390 / 897; }
+  .board { aspect-ratio: 390 / 1345; }
   .piece { left: calc(var(--mx) * 1%); top: calc(var(--my) * 1%); width: calc(var(--mw) * 1vw); }
   .piece__tilt { rotate: calc(var(--mr) * 1deg); }
   .piece__tag { opacity: 1; }
+  .piece--mr .piece__tag { left: auto; right: -0.6rem; rotate: 3deg; }
 
   .pv { grid-template-columns: 1fr; grid-template-rows: 56svh auto; overflow-y: auto; }
   .pv__stage { position: sticky; top: 0; z-index: 1; }
-  .pv__slide { inset: 64px 16px 46px; }
+  .pv__slide, .pv.has-groups .pv__slide { inset: 64px 16px 46px; }
+  /* en el celu los botones de las partes van en una fila que se desliza de costado, al lado de "cerrar" */
+  .pv__groups { left: 12px; top: 14px; gap: 6px; max-width: calc(100% - 106px); padding-right: 22px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent); }
+  .pv__group { padding: 0.55em 0.68em 0.6em; font-size: 0.78rem; background: rgba(25, 25, 25, 0.7); }
+  .pv__hint { bottom: 48px; }
   .pv__panel { overflow: visible; border-left: 0; border-top: 1px solid var(--line); padding: 26px var(--gutter) 40px; background: var(--ink); position: relative; z-index: 2; }
   .pv__x { position: fixed; top: 12px; right: 12px; z-index: 3; background: rgba(25, 25, 25, 0.7); }
   .pv__nav { width: 46px; height: 46px; margin-top: -23px; }
