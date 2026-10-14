@@ -20,7 +20,8 @@
   --soft: rgba(246, 246, 246, 0.7);
   --mute: rgba(246, 246, 246, 0.5);
   --line: rgba(246, 246, 246, 0.16);
-  --gutter: clamp(18px, 4.4vw, 68px);
+  /* en un iPhone acostado el margen nunca es menor que la zona de la cámara (en el resto esos valores son 0) */
+  --gutter: max(clamp(18px, 4.4vw, 68px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
   --hdr: 72px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -28,7 +29,8 @@
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
 
-html { background: var(--ink); -webkit-text-size-adjust: 100%; overflow-x: clip; }
+/* overflow-x: hidden es para Safari anterior al 16, que no conoce "clip"; donde existe, gana la segunda línea */
+html { background: var(--ink); -webkit-text-size-adjust: 100%; overflow-x: hidden; overflow-x: clip; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
@@ -44,6 +46,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis: none;
+  overflow-x: hidden;
   overflow-x: clip;
 }
 body.no-scroll { overflow: hidden; }
@@ -71,7 +74,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* textura de papel impreso (se nota sobre el blanco y el verde) */
 .paper {
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0; /* sin "inset": Safari 14.0 no lo conoce */
   z-index: 70;
   pointer-events: none;
   background: url("../assets/img/paper-shade.webp") center / cover no-repeat;
@@ -187,7 +190,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .person__logo { position: relative; display: block; height: clamp(54px, 6.2vw, 94px); }
 .person__logo img { height: 100%; width: auto; max-width: none; }
 .person__hov { position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 0.35s; }
-.person:hover .person__hov, .person:focus-visible .person__hov { opacity: 1; }
+/* :focus-visible va en su propia regla: Safari anterior al 15.4 no lo conoce y, si comparte lista, tira también el :hover */
+.person:hover .person__hov { opacity: 1; }
+.person:focus-visible .person__hov { opacity: 1; }
 .person__url { font-size: 0.9rem; color: var(--mute); transition: color 0.3s; }
 .person:hover .person__url { color: var(--lime); }
 
@@ -349,7 +354,8 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   transition: background-color 0.25s, box-shadow 0.15s, translate 0.15s;
 }
 .works__reset svg { flex: none; width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
-.works__reset:hover, .works__reset:focus-visible { background: var(--paper); }
+.works__reset:hover { background: var(--paper); }
+.works__reset:focus-visible { background: var(--paper); }
 .works__reset:active { translate: 3px 3px; box-shadow: 2px 2px 0 var(--paper); }
 /* la mesa ordena sus piezas adentro (z-index: 1): así ninguna pieza puede quedar arriba del botón de reorganizar ni del header */
 .board { position: relative; z-index: 1; width: 100%; aspect-ratio: 1440 / 1008; margin-top: clamp(16px, 3vh, 40px); }
@@ -368,7 +374,7 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .piece.is-drag { cursor: grabbing; }
 .piece__tilt { position: relative; rotate: calc(var(--r) * 1deg); }
 .piece__frame { position: relative; overflow: hidden; background: #222; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.85); }
-.piece__frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(246, 246, 246, 0.14); pointer-events: none; }
+.piece__frame::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; border: 1px solid rgba(246, 246, 246, 0.14); pointer-events: none; }
 .piece__frame img, .piece__frame video { display: block; width: 100%; height: auto; pointer-events: none; -webkit-user-drag: none; }
 .piece--video { z-index: 2; } /* va primero en el HTML, pero queda arriba de las otras si se pisan */
 .piece--video .piece__frame { background: #191919; }
@@ -394,14 +400,15 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 }
 .piece__tag b { font-weight: 700; }
 .piece__tag span { margin-left: 0.35em; opacity: 0.62; }
-.piece:hover .piece__tag, .piece.is-drag .piece__tag, .piece:focus-visible .piece__tag { opacity: 1; }
+.piece:hover .piece__tag, .piece.is-drag .piece__tag { opacity: 1; }
+.piece:focus-visible .piece__tag { opacity: 1; }
 
 /* =========================================================================
    PROYECTO ABIERTO
    ========================================================================= */
 .pv {
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   z-index: 65;
   display: grid;
   grid-template-columns: minmax(0, 1fr) clamp(320px, 31vw, 470px);
@@ -409,12 +416,13 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   color: var(--paper);
 }
 .pv__stage { position: relative; overflow: hidden; background: #111; }
-.pv__slides { position: absolute; inset: 0; }
+.pv__slides { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
 /* mientras baja una imagen se lee "cargando…" en el medio; la imagen lo tapa apenas aparece */
-.pv__slides::before { content: "cargando…"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 0.95rem; color: var(--mute); }
+.pv__slides::before { content: "cargando…"; position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: grid; place-items: center; font-size: 0.95rem; color: var(--mute); }
 .pv__slide {
   position: absolute;
-  inset: clamp(24px, 5vw, 80px) clamp(70px, 6vw, 96px);
+  top: clamp(24px, 5vw, 80px); bottom: clamp(24px, 5vw, 80px);
+  left: clamp(70px, 6vw, 96px); right: clamp(70px, 6vw, 96px);
   display: grid;
   grid-template: minmax(0, 1fr) / minmax(0, 1fr); /* así las imágenes altas (afiches, reel) entran enteras */
   place-items: center;
@@ -451,10 +459,10 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   transition: background-color 0.25s, border-color 0.25s, color 0.25s;
 }
 .pv__nav:hover { background: var(--lime); border-color: var(--lime); color: var(--ink); }
-.pv__prev { left: 16px; }
-.pv__next { right: 16px; }
+.pv__prev { left: max(16px, env(safe-area-inset-left, 0px)); }
+.pv__next { right: max(16px, env(safe-area-inset-right, 0px)); }
 .pv__count { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); font-size: 0.9rem; color: var(--mute); font-variant-numeric: tabular-nums; }
-.pv__panel { position: relative; overflow-y: auto; padding: clamp(80px, 10vh, 120px) clamp(24px, 3vw, 46px) 44px; border-left: 1px solid var(--line); }
+.pv__panel { position: relative; overflow-y: auto; overscroll-behavior: contain; padding: clamp(80px, 10vh, 120px) clamp(24px, 3vw, 46px) 44px; border-left: 1px solid var(--line); }
 .pv__x {
   position: absolute;
   top: 18px;
@@ -529,16 +537,18 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   .piece__tag { opacity: 1; }
   .piece--mr .piece__tag { left: auto; right: -0.6rem; rotate: 3deg; }
 
-  .pv { grid-template-columns: 1fr; grid-template-rows: 56svh auto; overflow-y: auto; }
+  /* 56vh es para iPhone anterior a iOS 15.4, que no conoce "svh"; donde existe, gana la segunda línea.
+     overscroll-behavior: en iPhone, al llegar al final del texto no se pone a scrollear la página de atrás */
+  .pv { grid-template-columns: 1fr; grid-template-rows: 56vh auto; grid-template-rows: 56svh auto; overflow-y: auto; overscroll-behavior: contain; }
   .pv__stage { position: sticky; top: 0; z-index: 1; }
-  .pv__slide { inset: 64px 16px 46px; }
+  .pv__slide { top: 64px; right: 16px; bottom: 46px; left: 16px; }
   .pv__groups { bottom: 0; }
   .pv__hint { bottom: 48px; }
   .pv__panel { overflow: visible; border-left: 0; border-top: 1px solid var(--line); padding: 26px var(--gutter) 40px; background: var(--ink); position: relative; z-index: 2; }
-  .pv__x { position: fixed; top: 12px; right: 12px; z-index: 3; background: rgba(25, 25, 25, 0.7); }
+  .pv__x { position: fixed; top: 12px; right: max(12px, env(safe-area-inset-right, 0px)); z-index: 3; background: rgba(25, 25, 25, 0.7); }
   .pv__nav { width: 46px; height: 46px; margin-top: -23px; }
-  .pv__prev { left: 8px; }
-  .pv__next { right: 8px; }
+  .pv__prev { left: max(8px, env(safe-area-inset-left, 0px)); }
+  .pv__next { right: max(8px, env(safe-area-inset-right, 0px)); }
 }
 
 @media (max-width: 760px) {
@@ -587,4 +597,34 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   .ct__mail { flex-direction: column; align-items: flex-start; gap: 0; }
   .ct__mail a { width: 100%; }
   .ct__copy { align-self: flex-start; margin: -4px 0 18px; }
+}
+
+/* =========================================================================
+   SAFARI / iPHONE VIEJOS
+   Cada bloque lo lee solo el navegador al que le falta eso: Chrome, Android
+   y Safari actual los saltean enteros, así que ahí no cambia nada.
+   ========================================================================= */
+/* Safari 14 no tiene aspect-ratio: la misma proporción hecha con padding
+   (sin esto la caja del logo y la mesa de trabajos quedan con alto cero) */
+@supports not (aspect-ratio: 1 / 1) {
+  .hero__logo::before { content: ""; display: block; padding-top: calc(100% * 880 / 3510); }
+  .board::before { content: ""; display: block; padding-top: calc(100% * 1008 / 1440); }
+  .piece__play { height: clamp(34px, 2.6vw, 44px); }
+  @media (max-width: 900px) { .board::before { padding-top: calc(100% * 1154 / 390); } }
+}
+/* Safari 14.0 (iOS 14.0 a 14.4) no conoce translate / rotate sueltos: el cartel de "atención" del celu
+   y la ayuda del visor se ubican con transform. (Las piezas quedan sin giro: ahí el transform lo usa GSAP.) */
+@supports not (translate: 0px) {
+  .pv__hint { transform: translateX(-50%); }
+  @media (max-width: 760px) {
+    .srv-head .warn,
+    .motion .srv-head .warn.rv.in { transform: translateX(calc(100% - 50px)); }
+    .srv-head .warn.is-open,
+    .motion .srv-head .warn.rv.in.is-open { transform: translateX(calc(-1 * var(--gutter))); }
+  }
+}
+/* Safari anterior al 16 no conoce overflow: clip: en el celu el cartel de "atención" asoma por la derecha
+   y dejaría arrastrar la página de costado; ahí lo recorta la sección */
+@supports not (overflow: clip) {
+  @media (max-width: 760px) { .services { overflow: hidden; } }
 }

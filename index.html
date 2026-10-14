@@ -9,13 +9,18 @@
   <meta name="theme-color" content="#191919">
   <meta property="og:title" content="cactus® | agencia de diseño gráfico y multimedia">
   <meta property="og:description" content="No te quedes afuera.">
+  <!-- Safari (hasta la versión 18) no muestra íconos SVG: el PNG es para Safari y el apple-touch-icon para "Agregar a inicio" del iPhone -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- La Poppins Bold se pide antes de tiempo, salvo cuando la página se abre desde una carpeta (file://):
+       ahí Safari en Mac rechaza ese pedido y después tampoco carga la letra. -->
+  <script>(function () { if (location.protocol === 'file:') return; var l = document.createElement('link'); l.rel = 'preload'; l.setAttribute('as', 'font'); l.type = 'font/ttf'; l.crossOrigin = 'anonymous'; l.href = 'assets/fonts/Poppins-Bold.ttf'; document.head.appendChild(l); })();</script>
   <!-- Poppins 400-700 van locales (assets/fonts); la Light y la Light Italic del manual vienen de Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap">
-  <link rel="preload" href="assets/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=19">
+  <link rel="stylesheet" href="css/style.css?v=20">
   <script>
     (function () {
       var d = document.documentElement;
@@ -23,6 +28,12 @@
       // las animaciones van siempre (como en juliamarro.com); se apagan con ?motion=0
       if (!/[?&]motion=0/.test(location.search)) d.classList.add('motion');
       setTimeout(function () { if (!window.__cactusReady) d.classList.remove('js', 'motion'); }, 3000);
+      // Safari en Mac viejas (macOS Catalina o anterior) no abre WebP: si una imagen .webp falla, se pide su gemela
+      // (.jpg en el visor de proyectos, .png con transparencia en el resto). En los demás navegadores esto nunca corre.
+      document.addEventListener('error', function (e) {
+        var t = e.target, g = t && t.tagName, a = g === 'IMG' ? 'src' : g === 'image' ? 'href' : '', u = a && t.getAttribute(a);
+        if (u && /\.webp(\?|$)/.test(u)) t.setAttribute(a, u.replace(/\.webp(?=\?|$)/, t.closest('.pv') ? '.jpg' : '.png'));
+      }, true);
     })();
   </script>
 </head>
@@ -96,14 +107,14 @@
             <img src="assets/img/logo-atus-blanco.webp" width="640" height="351" alt="">
             <img class="person__hov" src="assets/img/logo-atus-verde.webp" width="640" height="351" alt="">
           </span>
-          <span class="person__url">nachoreyes.com ↗</span>
+          <span class="person__url">nachoreyes.com ↗&#xFE0E;</span>
         </a>
         <a class="person" href="https://camilaizuel.com" target="_blank" rel="noopener" aria-label="Cami: ver camilaizuel.com">
           <span class="person__logo person__logo--cami">
             <img src="assets/img/logo-cami-blanco.webp" width="640" height="344" alt="">
             <img class="person__hov" src="assets/img/logo-cami-verde.webp" width="640" height="344" alt="">
           </span>
-          <span class="person__url">camilaizuel.com ↗</span>
+          <span class="person__url">camilaizuel.com ↗&#xFE0E;</span>
         </a>
       </div>
     </section>
@@ -362,6 +373,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
-  <script src="js/main.js?v=21"></script>
+  <script src="js/main.js?v=22"></script>
 </body>
 </html>

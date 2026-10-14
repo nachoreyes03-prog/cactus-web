@@ -201,6 +201,8 @@
   var waUrl = function (text) { return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text); };
   var VOLUMEN = 0.5; // volumen con el que arranca cada video del visor (0 a 1)
   function playQuiet(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  // por las dudas: pase lo que pase más abajo, las letras del logo nunca quedan escondidas
+  setTimeout(function () { $$(".hl").forEach(function (im) { im.style.opacity = 1; }); }, 3500);
 
   /* sin viudas: une las dos últimas palabras con un espacio que no corta,
      así nunca queda una palabra sola en la última línea */
@@ -241,7 +243,7 @@
     var fallback = function () {
       var ta = document.createElement("textarea");
       ta.value = CONFIG.email; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
-      document.body.appendChild(ta); ta.select();
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, ta.value.length); // en iPhone, select() solo no alcanza
       try { document.execCommand("copy"); } catch (e) {}
       ta.remove(); done();
     };
@@ -321,6 +323,11 @@
         });
       }, { rootMargin: "20% 0px 20% 0px" });
       $$(".piece video").forEach(function (v) { vidIO.observe(v); });
+      // iPhone o Mac en modo de bajo consumo no dejan arrancar videos solos: arrancan con el primer toque.
+      // (Donde ya están andando, esto no hace nada.)
+      var kick = function () { if (pvOpen) return; $$(".piece video").forEach(function (v) { if (v._inView && v.paused && v.getAttribute("src")) playQuiet(v); }); };
+      window.addEventListener("touchend", kick, { passive: true });
+      window.addEventListener("click", kick);
     }
 
     // el teléfono suena solo mientras la banda está en pantalla
@@ -358,7 +365,7 @@
   });
 
   /* ---------- proyecto abierto: imágenes + panel de texto ---------- */
-  var pv = $("#pv"), pvSlides = $("#pv-slides"), pvCount = $("#pv-count"), pvGroups = $("#pv-groups"), pvAt = 0, pvList = [], pvLast = null;
+  var pv = $("#pv"), pvSlides = $("#pv-slides"), pvCount = $("#pv-count"), pvGroups = $("#pv-groups"), pvAt = 0, pvList = [], pvLast = null, pvY = 0, pvW = 0;
   // las imágenes y los videos se bajan recién cuando les toca (la que se ve y las dos de al lado)
   function pvLoad(k) {
     var m = $("[data-src]", pvList[(k + pvList.length) % pvList.length]);
@@ -438,6 +445,7 @@
     noWidow($("#pv-title")); $$("#pv-text p").forEach(noWidow);
     pv.hidden = false; pvOpen = true;
     $$(".piece video").forEach(function (v) { if (!v.paused) v.pause(); });
+    pvY = window.pageYOffset; pvW = window.innerWidth; // dónde estaba la página (ver pvClose)
     document.body.classList.add("no-scroll");
     if (lenis) lenis.stop();
     pvGo(slide || 0);
@@ -455,7 +463,12 @@
     if (motion) $$(".piece video").forEach(function (v) { if (v._inView && v.getAttribute("src")) playQuiet(v); });
     document.body.classList.remove("no-scroll");
     if (lenis) lenis.start();
-    if (pvLast) pvLast.focus({ preventScroll: true });
+    // en iPhone la página de atrás puede haberse movido mientras el proyecto estaba abierto: vuelve a donde estaba
+    if (window.innerWidth === pvW && Math.abs(window.pageYOffset - pvY) > 2) {
+      if (lenis) lenis.scrollTo(pvY, { immediate: true, force: true }); else window.scrollTo(0, pvY);
+    }
+    // Safari viejo no respeta preventScroll: después de devolver el foco, la página queda donde estaba
+    if (pvLast) { var fx = window.pageXOffset, fy = window.pageYOffset; pvLast.focus({ preventScroll: true }); window.scrollTo(fx, fy); }
   }
   $("#pv-x").addEventListener("click", pvClose);
   $$("[data-pv]").forEach(function (b) { b.addEventListener("click", function () { pvGo(pvAt + Number(b.dataset.pv)); }); });
@@ -500,10 +513,12 @@
   if (!motion) { gsap.set(".hero__tag .w, .hl", { opacity: 1 }); return; }
 
   if (window.Lenis) {
-    lenis = new window.Lenis({ duration: 1.15, smoothWheel: true });
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
-    gsap.ticker.lagSmoothing(0);
+    try { lenis = new window.Lenis({ duration: 1.15, smoothWheel: true }); } catch (e) { lenis = null; } // sin scroll suave, la página anda igual
+    if (lenis) {
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
   }
 
   var fontsReady = Promise.race([
@@ -617,6 +632,7 @@
       p.addEventListener("pointerdown", function (e) {
         var touch = e.pointerType !== "mouse";
         if (!touch && e.button !== 0) return;
+        clearTimeout(p._dragT); p._dragged = false;
         if (!touch) e.preventDefault();
         var x0 = gsap.getProperty(p, "x"), y0 = gsap.getProperty(p, "y");
         var sx = e.clientX, sy = e.clientY, lx = sx, lt = performance.now(), vx = 0, vy = 0, ly = sy, moved = false, hold = null;
@@ -664,8 +680,11 @@
           p.removeEventListener("pointercancel", up);
           if (!moved) return; // fue un clic: abre el proyecto
           p.classList.remove("is-drag");
+          // con el dedo el clic llega un rato después de soltar (en iPhone, bastante después): la marca dura más,
+          // así soltar una pieza no abre el proyecto. El próximo toque la borra, o sea que no se pierde ningún clic.
           p._dragged = true;
-          setTimeout(function () { p._dragged = false; }, 0);
+          clearTimeout(p._dragT);
+          p._dragT = setTimeout(function () { p._dragged = false; }, touch ? 600 : 0);
           gsap.to(p, { x: clampX(gsap.getProperty(p, "x") + vx * 160), y: clampY(gsap.getProperty(p, "y") + vy * 160), duration: 1, ease: "power3.out" });
           gsap.to(tilt, { rotation: 0, scale: 1, duration: 1.1, ease: "elastic.out(1, 0.5)" });
           hintReset();
