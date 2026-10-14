@@ -71,9 +71,9 @@
     topados: {
       kind: "restyling de marca",
       title: "Topados",
-      meta: [["marca", "Topados, alfajores"], ["servicios", "restyling, manual de marca, reel"], ["año", "2026"]],
+      meta: [["cliente", "Topados, alfajores"], ["servicios", "actualización de logo, manual de marca, reel"], ["año", "2026"]],
       text: [
-        "Restyling de marca para Topados, alfajores. El imagotipo nuevo lleva un escudo con una T y se usa completo, solo el logotipo o solo el isotipo.",
+        "Topados es un cliente al que ayudamos a actualizar su logo. El imagotipo nuevo lleva un escudo con una T y se usa completo, solo el logotipo o solo el isotipo.",
         "El manual define Georgia y Public Sans como tipografías, dos tramas y una combinación de colores para cada variedad: son seis, del dulce de leche con chocolate negro al Chocolate Intenso Black.",
         "El reel muestra el logotipo que cambia de letra hasta llegar al nuevo, la paleta, la trama y el packaging."
       ],
@@ -176,7 +176,7 @@
         "Cada cuadro lleva dibujo encima de la imagen: \"La Araña\" escrito sobre la cancha, una telaraña alrededor de la jugada, el remate y el festejo."
       ],
       slides: [
-        { video: "assets/trabajos/stopmotion/julian-alvarez.mp4", poster: "assets/trabajos/stopmotion/julian-alvarez.jpg", w: 1280, h: 720, alt: "Stop motion sobre cuadros de un partido de la selección argentina con trama de imprenta, dibujados encima: La Araña escrito sobre la cancha, una telaraña, la corrida con la pelota, el arco, el festejo y la firma Atus Kmi" }
+        { video: "assets/trabajos/stopmotion/julian-alvarez.mp4", poster: "assets/trabajos/stopmotion/julian-alvarez.jpg", w: 1920, h: 1080, alt: "Stop motion sobre cuadros de un partido de la selección argentina con trama de imprenta, dibujados encima: La Araña escrito sobre la cancha, una telaraña, la corrida con la pelota, el arco, el festejo y la firma Atus Kmi" }
       ]
     },
     puertas: {
