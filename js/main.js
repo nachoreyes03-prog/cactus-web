@@ -141,15 +141,11 @@
         "En talloverde.com esas ilustraciones ordenan la compra: promociones, frutas, hortalizas, almacén, granja, aromáticas y mermeladas. Después vuelven en los posteos, en las historias y en los newsletters que anunciaron la web nueva."
       ],
       slides: [
-        { video: "assets/trabajos/talloverde/talloverde-video.mp4", poster: "assets/trabajos/talloverde/talloverde-video-poster.jpg", w: 1920, h: 1080, g: "video", alt: "Video del caso Tallo Verde: la guía de marca, la web talloverde.com, los posteos e historias y los newsletters" },
+        { video: "assets/trabajos/talloverde/talloverde-video.mp4?v=2", poster: "assets/trabajos/talloverde/talloverde-video-poster.jpg?v=2", w: 1920, h: 1080, g: "video", alt: "Video del caso Tallo Verde: la guía de marca, la web talloverde.com, los posteos e historias y los newsletters" },
         { video: "assets/trabajos/talloverde/talloverde-web.mp4", poster: "assets/trabajos/talloverde/talloverde-web-poster.jpg", w: 1920, h: 1080, g: "web", loop: true, alt: "Recorrido por talloverde.com: el inicio, las categorías con sus ilustraciones, la página de frutas y el pie" },
-        { video: "assets/trabajos/talloverde/talloverde-redes.mp4", poster: "assets/trabajos/talloverde/talloverde-redes-poster.jpg", w: 1280, h: 720, g: "redes", loop: true, alt: "Los posteos de Tallo Verde en un muro que se mueve: las placas del feed en cinco columnas" },
-        { src: "assets/trabajos/talloverde/redes-grilla.webp", w: 1622, h: 2000, g: "redes", alt: "Nueve posteos de Tallo Verde en grilla de tres por tres" },
+        { video: "assets/trabajos/talloverde/talloverde-redes.mp4?v=2", poster: "assets/trabajos/talloverde/talloverde-redes-poster.jpg?v=2", w: 1280, h: 720, g: "redes", loop: true, alt: "Los posteos de Tallo Verde en un muro que se mueve: las placas del feed en cinco columnas" },
+        { src: "assets/trabajos/talloverde/redes-grilla.webp?v=2", w: 1622, h: 2000, g: "redes", alt: "Nueve posteos de Tallo Verde en grilla de tres por tres" },
         { src: "assets/trabajos/talloverde/redes-historias.webp", w: 1920, h: 679, g: "redes", alt: "Cinco historias de Tallo Verde: armá tu semana, agarrá el que necesites, llegó la primavera, quiz rápido y dato curioso" },
-        { src: "assets/trabajos/talloverde/redes-nueva-web.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «Nueva web, ¡nos renovamos!» con las ilustraciones de los productos saliendo de una ventana de navegador" },
-        { src: "assets/trabajos/talloverde/redes-hay-brocoli.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «Hay brócoli»: un papel con la silueta de un brócoli recortada sobre una foto de brócolis" },
-        { src: "assets/trabajos/talloverde/redes-frutos-secos.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo sobre frutos secos: un anillo de frutos secos con el dato «20%» en el centro" },
-        { src: "assets/trabajos/talloverde/redes-ticket.webp", w: 1218, h: 1522, g: "redes", alt: "Posteo «conseguilos en Tallo Verde»: un ticket de compra apoyado sobre una canasta de frutas y verduras" },
         { src: "assets/trabajos/talloverde/newsletter-general.webp", w: 1212, h: 3858, g: "newsletter", tall: true, tw: 640, alt: "Newsletter general de Tallo Verde: De la huerta a tu casa, cómo funciona y los productos" },
         { src: "assets/trabajos/talloverde/newsletter-lanzamiento.webp", w: 1212, h: 4131, g: "newsletter", tall: true, tw: 640, alt: "Newsletter de lanzamiento de la web nueva de Tallo Verde: comprar online es así de simple" },
         { src: "assets/trabajos/talloverde/newsletter-lanzamiento-vol2.webp", w: 1212, h: 3322, g: "newsletter", tall: true, tw: 640, alt: "Segundo newsletter de lanzamiento de Tallo Verde: elegí, armá y recibí" }
