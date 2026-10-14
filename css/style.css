@@ -329,7 +329,8 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
    ========================================================================= */
 .works { position: relative; padding: clamp(100px, 14vh, 170px) 0 clamp(50px, 7vh, 100px); overflow: hidden; }
 .works__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 24px; padding: 0 var(--gutter); }
-.works__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 0.5rem; }
+/* la ayuda y el botón de reorganizar van siempre por encima de las piezas, aunque alguna pase por ahí */
+.works__tools { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 0.5rem; }
 .works__hint { margin: 0; font-size: 1.02rem; font-weight: 300; color: var(--soft); }
 /* el botón de reorganizar: un cartel verde con sombra blanca, bien a la vista */
 .works__reset {
@@ -350,7 +351,8 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .works__reset svg { flex: none; width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
 .works__reset:hover, .works__reset:focus-visible { background: var(--paper); }
 .works__reset:active { translate: 3px 3px; box-shadow: 2px 2px 0 var(--paper); }
-.board { position: relative; width: 100%; aspect-ratio: 1440 / 1008; margin-top: clamp(16px, 3vh, 40px); }
+/* la mesa ordena sus piezas adentro (z-index: 1): así ninguna pieza puede quedar arriba del botón de reorganizar ni del header */
+.board { position: relative; z-index: 1; width: 100%; aspect-ratio: 1440 / 1008; margin-top: clamp(16px, 3vh, 40px); }
 .piece {
   position: absolute;
   left: calc(var(--x) * 1%);
@@ -473,10 +475,11 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
 .pv__meta dd { margin: 0; }
 .pv__meta a { color: var(--lime); text-underline-offset: 0.2em; }
 .pv__text p { margin: 0 0 1em; font-size: 1.02rem; line-height: 1.7; color: var(--soft); }
-/* las partes del proyecto (video, reel, manual, redes…): van en el panel, justo abajo del texto */
-.pv__groups { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.7rem; }
+/* las partes del proyecto (video, reel, manual, redes…): van en el panel, justo abajo del texto.
+   Si el texto es largo y no entra, quedan pegadas al borde de abajo: siempre están a la vista */
+.pv__groups { position: sticky; bottom: -44px; z-index: 1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.9rem; padding: 14px 0 16px; background: var(--ink); }
 .pv__groups[hidden] { display: none; }
-.pv__group { padding: 0.6em 1em 0.66em; border: 2px solid rgba(246, 246, 246, 0.8); font-weight: 600; font-size: 1.02rem; line-height: 1; letter-spacing: -0.02em; transition: background-color 0.25s, border-color 0.25s, color 0.25s; }
+.pv__group { padding: 0.55em 0.8em 0.6em; border: 2px solid rgba(246, 246, 246, 0.8); font-weight: 600; font-size: 0.95rem; line-height: 1; letter-spacing: -0.02em; transition: background-color 0.25s, border-color 0.25s, color 0.25s; }
 .pv__group:hover, .pv__group.on { background: var(--lime); border-color: var(--lime); color: var(--ink); }
 
 /* =========================================================================
@@ -529,6 +532,7 @@ p, .srv__desc, .pv__title { text-wrap: pretty; }
   .pv { grid-template-columns: 1fr; grid-template-rows: 56svh auto; overflow-y: auto; }
   .pv__stage { position: sticky; top: 0; z-index: 1; }
   .pv__slide { inset: 64px 16px 46px; }
+  .pv__groups { bottom: 0; }
   .pv__hint { bottom: 48px; }
   .pv__panel { overflow: visible; border-left: 0; border-top: 1px solid var(--line); padding: 26px var(--gutter) 40px; background: var(--ink); position: relative; z-index: 2; }
   .pv__x { position: fixed; top: 12px; right: 12px; z-index: 3; background: rgba(25, 25, 25, 0.7); }
