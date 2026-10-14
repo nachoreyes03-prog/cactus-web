@@ -44,15 +44,7 @@
         { src: "assets/trabajos/cactus/manual-14.webp", w: 1800, h: 1272, g: "manual", alt: "Trama: la A estrella repetida en filas a 20 grados, en negro sobre verde y en verde sobre negro" },
         { src: "assets/trabajos/cactus/manual-15.webp", w: 1800, h: 1272, g: "manual", alt: "Aplicaciones: dos afiches Nos llaman?, sobre blanco y sobre negro, con el teléfono verde" },
         { src: "assets/trabajos/cactus/manual-16.webp", w: 1800, h: 1272, g: "manual", alt: "Aplicaciones: cuatro historias verticales para redes, dos de Nos llaman? y dos con los servicios" },
-        { src: "assets/trabajos/cactus/manual-17.webp", w: 1800, h: 1272, g: "manual", alt: "Contacto: el logotipo en blanco sobre negro, el mail estudio.c4ctus@gmail.com y no te quedes afuera" },
-        { src: "assets/img/logo-papel-negro.webp", w: 1440, h: 810, g: "piezas", alt: "Logotipo de cactus® en blanco sobre papel negro" },
-        { src: "assets/img/cactus-papel-verde.webp", w: 900, h: 1126, g: "piezas", alt: "Logotipo de cactus® impreso sobre papel verde" },
-        { src: "assets/img/trama-verde.webp", w: 900, h: 900, g: "piezas", alt: "Trama de la A estrella a 20 grados sobre verde" },
-        { src: "assets/img/afiche-blanco.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche Nos llaman? sobre blanco, con el teléfono verde" },
-        { src: "assets/img/afiche-negro.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche Nos llaman? sobre negro" },
-        { src: "assets/img/poster-frases-verde.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche verde: probando frases para testear distintas gráficas" },
-        { src: "assets/img/poster-colores-negro.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche negro: probando todos los colores juntos" },
-        { src: "assets/img/poster-frases-negro.webp", w: 900, h: 1126, g: "piezas", alt: "Afiche negro: probando frases, versión negra" }
+        { src: "assets/trabajos/cactus/manual-17.webp", w: 1800, h: 1272, g: "manual", alt: "Contacto: el logotipo en blanco sobre negro, el mail estudio.c4ctus@gmail.com y no te quedes afuera" }
       ]
     },
     julia: {
