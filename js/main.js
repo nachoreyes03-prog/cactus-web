@@ -104,16 +104,18 @@
       ]
     },
     udent: {
-      kind: "naming · identidad de marca",
+      kind: "naming · identidad de marca · web",
       title: "U.Dent",
-      meta: [["cliente", "estudio dental"], ["servicios", "naming, logotipo, isotipo, tramas, papelería, manual de marca, video"], ["año", "2026"]],
+      meta: [["cliente", "estudio dental"], ["servicios", "naming, logotipo, isotipo, tramas, papelería, manual de marca, video, diseño web"], ["sitio", "<a href=\"https://ulfedentista.com\" target=\"_blank\" rel=\"noopener\">ulfedentista.com</a>"], ["año", "2026"]],
       text: [
         "Naming e identidad para un estudio dental. El nombre nace de Ulfe.Dentista, el apellido y el oficio unidos por un punto, y se acorta a U.Dent.",
-        "Ese punto ata toda la marca: dibuja el isotipo, una U de dieciséis puntos; une lo liviano con lo pesado en cada línea de texto, Poppins antes y Helvetica después, como en Estudio.Dental; y arma las tramas. Todo en crema, marrón y aqua."
+        "Ese punto ata toda la marca: dibuja el isotipo, una U de dieciséis puntos; une lo liviano con lo pesado en cada línea de texto, Poppins antes y Helvetica después, como en Estudio.Dental; y arma las tramas. Todo en crema, marrón y aqua.",
+        "También hicimos su web, ulfedentista.com: la misma marca en pantalla, con los tratamientos, el equipo, el escáner 3D sin moldes, cómo llegar y la consulta por WhatsApp a un toque."
       ],
       slides: [
         { video: "assets/trabajos/udent/udent-video.mp4", poster: "assets/trabajos/udent/udent-video-poster.jpg", w: 1920, h: 1080, g: "video", alt: "Video de marca de U.Dent en 15 segundos: el punto de Ulfe.Dentista queda quieto mientras el nombre se acorta a U.Dent, se multiplica en la U de puntos, ata Juan.Ulfe, Estudio.Dental y poppins.helvetica, se vuelve los tres colores, las tramas y las tarjetas" },
         { video: "assets/trabajos/udent/udent-reel.mp4", poster: "assets/trabajos/udent/udent-reel-poster.jpg", w: 1080, h: 1920, g: "reel", alt: "El mismo video de marca de U.Dent en formato vertical para reel" },
+        { video: "assets/trabajos/udent/udent-web.mp4", poster: "assets/trabajos/udent/udent-web-poster.jpg", w: 1920, h: 1080, g: "web", loop: true, alt: "Recorrido por ulfedentista.com: el inicio, los tratamientos, Juan Ulfe y equipo, el escáner 3D sin moldes, cómo llegar y la consulta por WhatsApp" },
         { src: "assets/trabajos/udent/manual-01.webp", w: 2000, h: 1413, g: "manual", alt: "Tapa del manual de marca de U.Dent: logotipo en marrón e isotipo de puntos en aqua sobre crema" },
         { src: "assets/trabajos/udent/manual-02.webp", w: 2000, h: 1413, g: "manual", alt: "Índice del manual de U.Dent, con cada sección escrita liviano.pesado" },
         { src: "assets/trabajos/udent/manual-03.webp", w: 2000, h: 1413, g: "manual", alt: "El nombre: Ulfe.Dentista, apellido y oficio unidos por un punto, se acorta a U.Dent" },
