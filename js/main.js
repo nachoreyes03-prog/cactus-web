@@ -21,8 +21,7 @@
       title: "cactus®",
       meta: [["cliente", "cactus®"], ["servicios", "logotipo, reducciones, trama, manual de marca, video"], ["año", "2026"]],
       text: [
-        "Identidad propia: logotipo, dos reducciones (el monograma CA y la A estrella), paleta, tipografías y trama.",
-        "Manual de marca y video de presentación."
+        "Identidad, manual de marca y video para nuestra marca."
       ],
       slides: [
         { video: "assets/trabajos/cactus/cactus-video.mp4", poster: "assets/trabajos/cactus/cactus-video.jpg", w: 1920, h: 1080, g: "video", alt: "Video de marca de cactus®, versión horizontal: suena un teléfono, aparece Nos llaman? ah sí, es tu marca preguntando por cactus, y sigue el manual de marca: logotipo, grilla, monograma, tipografías, colores, trama y aplicaciones" },
@@ -51,8 +50,7 @@
       title: "Julia Marro",
       meta: [["cliente", "Julia Marro"], ["servicios", "arte de disco, tipografía, diseño web"], ["sitio", "<a href=\"https://juliamarro.com\" target=\"_blank\" rel=\"noopener\">juliamarro.com</a>"], ["año", "2026"]],
       text: [
-        "Arte del disco Boston a BSAS: tapa, collage, contratapa y tipografía a medida.",
-        "Diseño web de juliamarro.com, su portfolio y su disco en un solo sitio."
+        "Arte de disco, tipografía y página web para productora y artista."
       ],
       slides: [
         { video: "assets/trabajos/julia/julia-web-y-disco.mp4", poster: "assets/trabajos/julia/julia-web-y-disco-poster.jpg", w: 1440, h: 810, g: "video", alt: "Video: recorrido por juliamarro.com y el arte del disco Boston a BSAS, con carteles que cuentan cómo se hizo" },
@@ -72,8 +70,7 @@
       title: "Topados",
       meta: [["cliente", "Topados, alfajores"], ["servicios", "actualización de logo, manual de marca, reel"], ["año", "2026"]],
       text: [
-        "Actualización del logo de Topados.",
-        "Manual de marca con imagotipo, tipografías, tramas y una paleta por variedad, y reel de presentación."
+        "Actualización de logo y manual de marca para alfajores."
       ],
       slides: [
         { video: "assets/trabajos/topados/topados-reel.mp4", poster: "assets/trabajos/topados/topados-reel.jpg", w: 1080, h: 1920, g: "reel", alt: "Reel del restyling de marca de Topados: el logotipo cambia de tipografía hasta llegar al nuevo, aparece el escudo, la paleta por variedad, la trama y los alfajores con su packaging" },
@@ -106,8 +103,7 @@
       title: "U.Dent",
       meta: [["cliente", "estudio dental"], ["servicios", "naming, logotipo, isotipo, tramas, papelería, manual de marca, video, diseño web"], ["sitio", "<a href=\"https://ulfedentista.com\" target=\"_blank\" rel=\"noopener\">ulfedentista.com</a>"], ["año", "2026"]],
       text: [
-        "Naming e identidad para un estudio dental: logotipo, isotipo, tramas, papelería y manual de marca.",
-        "Video de marca y diseño web de ulfedentista.com."
+        "Branding completo y página web para odontólogo."
       ],
       slides: [
         { video: "assets/trabajos/udent/udent-video.mp4", poster: "assets/trabajos/udent/udent-video-poster.jpg", w: 1920, h: 1080, g: "video", alt: "Video de marca de U.Dent en 15 segundos: el punto de Ulfe.Dentista queda quieto mientras el nombre se acorta a U.Dent, se multiplica en la U de puntos, ata Juan.Ulfe, Estudio.Dental y poppins.helvetica, se vuelve los tres colores, las tramas y las tarjetas" },
@@ -136,8 +132,7 @@
       title: "Tallo Verde",
       meta: [["cliente", "Tallo Verde"], ["servicios", "diseño web, redes, newsletters"], ["sitio", "<a href=\"https://talloverde.com\" target=\"_blank\" rel=\"noopener\">talloverde.com</a>"], ["año", "2026"]],
       text: [
-        "Diseño web, redes y newsletters para Tallo Verde, huerta orgánica con venta online.",
-        "Un mismo sistema de color, tipografía e ilustraciones en talloverde.com, los posteos y los newsletters."
+        "Página web, rebranding y redes sociales para huerta de productos orgánicos."
       ],
       slides: [
         { video: "assets/trabajos/talloverde/talloverde-video.mp4?v=2", poster: "assets/trabajos/talloverde/talloverde-video-poster.jpg?v=2", w: 1920, h: 1080, g: "video", alt: "Video del caso Tallo Verde: la guía de marca, la web talloverde.com, los posteos e historias y los newsletters" },
@@ -155,7 +150,7 @@
       title: "Scott Pilgrim",
       meta: [["de", "Atus y Kmi"], ["técnica", "stop motion"]],
       text: [
-        "Stop motion de Scott Pilgrim vs. the World con «Black Sheep» de Metric, intervenido cuadro por cuadro."
+        "Stop motion en mixed media sobre «Black Sheep» de Metric."
       ],
       slides: [
         { video: "assets/trabajos/stopmotion/scott-pilgrim.mp4", poster: "assets/trabajos/stopmotion/scott-pilgrim.jpg", w: 1920, h: 1080, alt: "Stop motion sobre cuadros de Scott Pilgrim con trama de imprenta, dibujados y escritos encima: la banda en el escenario, Scott y Ramona entre el público, palabras como that guy on bass, oh yeah y hello again friend of a friend, y la firma de Atus Kmi al final" }
@@ -166,7 +161,7 @@
       title: "Julián Álvarez",
       meta: [["de", "Atus y Kmi"], ["técnica", "stop motion"]],
       text: [
-        "Stop motion de un gol de Julián Álvarez, intervenido cuadro por cuadro."
+        "Stop motion en mixed media de un gol de Julián Álvarez."
       ],
       slides: [
         { video: "assets/trabajos/stopmotion/julian-alvarez.mp4", poster: "assets/trabajos/stopmotion/julian-alvarez.jpg", w: 1920, h: 1080, alt: "Stop motion sobre cuadros de un partido de la selección argentina con trama de imprenta, dibujados encima: La Araña escrito sobre la cancha, una telaraña, la corrida con la pelota, el arco, el festejo y la firma Atus Kmi" }
@@ -177,7 +172,7 @@
       title: "Puertas",
       meta: [["de", "Atus y Kmi"], ["técnica", "stop motion"], ["lugar", "Barcelona"]],
       text: [
-        "Una colección de puertas de Barcelona, hecha stop motion."
+        "Stop motion en mixed media con puertas de Barcelona."
       ],
       slides: [
         { video: "assets/trabajos/stopmotion/puertas.mp4", poster: "assets/trabajos/stopmotion/puertas.jpg", w: 608, h: 1080, alt: "Stop motion con fotos de puertas de Barcelona cubiertas de grafitis y stickers, una por cuadro, que termina con la firma de Atus Kmi dentro de una puerta dibujada en blanco y negro" }
